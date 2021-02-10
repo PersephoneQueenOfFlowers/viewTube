@@ -1,5 +1,5 @@
 {
-  "name": "viewtube2021",
+  "name": "viewTube",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.12.13",
@@ -15,11 +15,10 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
-    "serve": "^11.3.2",
     "webpack": "^4.46.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "webpack -w --mode=development",
     "postinstall": "webpack"
   },
   "engines": {
