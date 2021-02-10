@@ -56,6 +56,8 @@ group :development do
   gem 'securerandom'
 end
 
+gem 'capybara', '>= 2.15'
+
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'selenium-webdriver'
