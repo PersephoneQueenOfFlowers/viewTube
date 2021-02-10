@@ -1,6 +1,3 @@
-require 'securerandom'
-require 'bcrypt'
-require 'byebug'
 
 class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
