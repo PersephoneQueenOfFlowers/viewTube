@@ -32,6 +32,7 @@ gem 'react-rails'
 gem 'jquery-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'bcrypt'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -52,7 +53,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'table_print'
-  gem 'bcrypt'
   gem 'securerandom'
 end
 
