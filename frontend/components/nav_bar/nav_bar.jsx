@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Signup from '../session/signup';
+import SearchBar from './searchbar';
+// import PersonIcon from '../../../app/assets/images/person_icon.svg';
 
 export default ({ currentUser, logout }) => {
 
@@ -10,17 +12,20 @@ const display = currentUser ? (
       <button onClick={logout}>Logout</button>
     </div>
   ) : (
-    <div>
-     <Link to="/signup">Sign Up</Link>
-      <Link to="/login">Log In</Link>
+    <div className={'nav'}> 
+      <div className={'left'}><h2>viewTube</h2></div>
+      <div className={'center'}> <SearchBar /> </div> 
+      <div className={'right'}> 
+      <Link to="/signup">Sign Up</Link>
+        <Link to="/login">Log In</Link>
+      </div>
     </div>
   );
   return (
     <header className="nav-bar">
-      <h1 className="logo">viewTube</h1>
-      <div>
+
         {display}
-      </div>
+   
     </header>
   )
 }
