@@ -470,10 +470,11 @@ var _reactFontawesome = __webpack_require__(/*! @fortawesome/react-fontawesome *
 
 var _freeSolidSvgIcons = __webpack_require__(/*! @fortAwesome/free-solid-svg-icons */ "./node_modules/@fortAwesome/free-solid-svg-icons/index.es.js");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _login = __webpack_require__(/*! ../session/login */ "./frontend/components/session/login.jsx");
 
-// import PersonIcon from '../../../app/assets/images/person_icon.svg';
-{/* <h2>vi<FontAwesomeIcon icon={faEye} /><FontAwesomeIcon icon={faEye} />Tube</h2> */}
+var _login2 = _interopRequireDefault(_login);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
@@ -482,18 +483,34 @@ exports.default = function (_ref) {
 
   var display = currentUser ? _react2.default.createElement(
     'div',
-    null,
+    { className: 'nav' },
     _react2.default.createElement(
-      'h3',
-      null,
-      'Welcome ',
-      currentUser.username,
-      '!'
+      'div',
+      { className: 'left' },
+      _react2.default.createElement('span', { className: "logo" }),
+      _react2.default.createElement(
+        'h3',
+        null,
+        'Welcome ',
+        currentUser.username,
+        '!'
+      )
     ),
     _react2.default.createElement(
-      'button',
-      { onClick: logout },
-      'Logout'
+      'div',
+      { className: 'center' },
+      ' ',
+      _react2.default.createElement(_searchbar2.default, null),
+      ' '
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'right' },
+      _react2.default.createElement(
+        'button',
+        { onClick: logout },
+        'Logout'
+      )
     )
   ) : _react2.default.createElement(
     'div',
@@ -681,19 +698,23 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _nav_bar = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
+
+var _nav_bar2 = _interopRequireDefault(_nav_bar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (_ref) {
   var user = _ref.user;
   return _react2.default.createElement(
-    "header",
-    { className: "nav-bar" },
+    'header',
+    { className: 'nav-bar' },
     _react2.default.createElement(
-      "h4",
+      'h4',
       null,
-      "Welcome ",
+      'Welcome ',
       user.username,
-      "!"
+      '!'
     )
   );
 };
@@ -1165,7 +1186,7 @@ var Sidebar = function (_React$Component) {
               null,
               'Log in to like videos ',
               _react2.default.createElement('br', null),
-              'and comment'
+              ' and comment'
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
