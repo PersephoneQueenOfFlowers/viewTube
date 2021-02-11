@@ -35,6 +35,76 @@
       }
     }
   }
+  &.home{
+    h2 {
+      padding-bottom: 18px;
+      line-height: 15px;
+    }
+    a {
+      position: relative;
+      // color: #548fe7;
+      font-weight: bold;
+      padding: 0px 30px;
+      &:before {
+        content: '';
+        background-image: url('home.png');
+        position: absolute;
+        top: -7.25px;
+        left: -6px; 
+        z-index: 100;
+        background-size: cover;
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  &.bestOf ul {
+    li{
+      h2 {
+        padding-bottom: 18px;
+        line-height: 15px;
+      }
+      // a {
+        position: relative;
+        font-weight: bold;
+        padding: 30px 52px;
+        &:before {
+          content: '';
+          // background-image: url(music.png);
+          position: absolute;
+          top: 22.75px;
+          left: 14px;
+          z-index: 100;
+          background-size: cover;
+          width: 30px;
+          height: 30px;
+        // }
+      }
+      &:first-child{
+        background-image: url(music.png);
+        background-repeat: no-repeat;
+        background-size: 40px;
+        background-position: 10px;
+      }
+      &:nth-child(2):before{
+        background-image: url(sports.png);
+        background-repeat: no-repeat;
+      }
+      &:nth-child(3):before{
+        background-image: url(gaming.png);
+        background-repeat: no-repeat;
+      }
+      &:nth-child(4):before{
+        background-image: url(movies.png);
+        background-repeat: no-repeat;
+      }
+      &:nth-child(5):before{
+        background-image: url(news.png);
+        background-repeat: no-repeat;
+        background-position: -3px;
+      }
+    }
+  }
 }
 
 .sidebar svg:not(:root).svg-inline--fa{
