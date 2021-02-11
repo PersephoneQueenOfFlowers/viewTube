@@ -1161,6 +1161,13 @@ var Sidebar = function (_React$Component) {
             'li',
             { className: "sideNavItem signIn" },
             _react2.default.createElement(
+              'h2',
+              null,
+              'Log in to like videos ',
+              _react2.default.createElement('br', null),
+              'and comment'
+            ),
+            _react2.default.createElement(
               _reactRouterDom.Link,
               { to: '/login' },
               'Log In'
