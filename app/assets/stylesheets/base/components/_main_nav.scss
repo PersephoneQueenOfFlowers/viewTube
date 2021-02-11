@@ -7,7 +7,7 @@
   margin: 0 auto;
   line-height: 20px;
   height: 56px;
-  padding: 0 16px;
+  padding: 5px 16px;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -24,9 +24,31 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    .left h2{
-      zoom: 2;
+    .left .logo{
+      background-image: url('vootubeLogo.png');
+      position: absolute;
+      top: 6px;
+      left: 4px;
+      z-index: 100;
+      background-size: cover;
+      width: 170px;
+      height: 40px;
+    }
+    .right a:last-child {
+      position:relative;
       margin-left: 15px;
+      padding-left: 40px;
+      &:before{
+        content: '';
+        background-image: url('youTubeLogin.png');
+        position: absolute;
+        top: 6px;
+        left: 4px;
+        z-index: 100;
+        background-size: cover;
+        width: 30px;
+        height: 30px;
+      }
     }
   }
   a{
@@ -34,33 +56,54 @@
     background-color: transparent;
     background-image: url("data:image/svg+xml;base64,Cjxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJ4TWlkWU1pZCBtZWV0IiBmb2N1c2FibGU9ImZhbHNlIiBjbGFzcz0ic3R5bGUtc2NvcGUgeXQtaWNvbiIgc3R5bGU9InBvaW50ZXItZXZlbnRzOiBub25lOyBkaXNwbGF5OiBibG9jazsgd2lkdGg6IDEwMCU7IGhlaWdodDogMTAwJTsiPgogIDxnIGNsYXNzPSJzdHlsZS1zY29wZSB5dC1pY29uIj4KICAgICAgPHBhdGggZD0iTTEyLDAgQzE4LjYyMzc1LDAgMjQsNS4zNzYyNSAyNCwxMiBDMjQsMTguNjIzNzUgMTguNjIzNzUsMjQgMTIsMjQgQzUuMzc2MjUsMjQgMCwxOC42MjM3NSAwLDEyIEMwLDUuMzc2MjUgNS4zNzYyNSwwIDEyLDAgWiBNMTIsMTAuNjM2MjUgQzEzLjY2LDEwLjYzNjI1IDE1LDkuMjk2MjUgMTUsNy42MzYyNSBDMTUsNS45NzYyNSAxMy42Niw0LjYzNjI1IDEyLDQuNjM2MjUgQzEwLjM0LDQuNjM2MjUgOSw1Ljk3NjI1IDksNy42MzYyNSBDOSw5LjI5NjI1IDEwLjM0LDEwLjYzNjI1IDEyLDEwLjYzNjI1IFogTTEyLDEyLjQwODc1IEM4LjMzMzc1LDEyLjQwODc1IDUuNDU1LDE0LjE4MTI1IDUuNDU1LDE1LjgxNzUgQzYuODQxMjUsMTcuOTUgOS4yNjg3NSwxOS4zNjI1IDEyLDE5LjM2MjUgQzE0LjczMTI1LDE5LjM2MjUgMTcuMTU4NzUsMTcuOTUgMTguNTQ1LDE1LjgxNzUgQzE4LjU0NSwxNC4xODEyNSAxNS42NjYyNSwxMi40MDg3NSAxMiwxMi40MDg3NSBaIiBjbGFzcz0ic3R5bGUtc2NvcGUgeXQtaWNvbiI+CiAgICAgIDwvcGF0aD4KICAgIDwvZz4KPC9zdmc+CgoKCiA=");
     background-size: 15px 15px;
-    padding: 10px 17px;
+    padding: 14px 21px;
     border-radius: 3px;
     margin: 0 0.29em;
     box-sizing: border-box;
     border: 1px solid;
     text-decoration: none;
-
+    font-size: 1.6rem;
+    font-weight: bold;
   }
-  .search-bar form input {   
-    background-color: #121212;
-    border: none;
-    box-shadow: none;
-    color: inherit;
-    font-family: 'Roboto','Noto',sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    margin-left: 4px;
-    max-width: 100%;
-    outline: none;
-    text-align: inherit;
-    width: 100%;
-    -ms-flex: 1 1 0.000000001px;
-    -webkit-flex: 1;
-    flex: 1;
-    -webkit-flex-basis: 0.000000001px;
-    flex-basis: 0.000000001px;
-    outline: "none";
+  .field {
+    position:relative;
+    #search {   
+      -ms-flex: 1 1 0.000000001px;
+      -webkit-flex: 1;
+      flex: 1;
+      -webkit-flex-basis: 0.000000001px;
+      flex-basis: 0.000000001px;
+      margin-left: 4px;
+      padding: 2px 8px;
+      box-sizing: border-box;
+      min-width: 645px;
+      line-height: 28px;
+      border: none;
+      background-color: #121212;
+      box-shadow: none;
+      text-align: inherit;
+      color: inherit;
+      font-family: 'Roboto','Noto',sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      outline: none;
+    }
+    #searchSubmit {
+      position: absolute;
+      right: 0;
+      height: 32px;
+      width: 50px;
+      border: 1px solid #303030;
+      background-color: #313131;
+      top: 0px;
+    }
+    svg {
+      height: 15px;
+      width: 15px;
+      z-index: 100;
+      position: absolute;
+      top: 7px;
+      right: 17px;
+    }
   }
 }

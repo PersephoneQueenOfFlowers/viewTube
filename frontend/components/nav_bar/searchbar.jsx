@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortAwesome/free-solid-svg-icons';
 class SearchBar extends React.Component {
 
 	// state = {term: ''};
@@ -20,6 +21,8 @@ class SearchBar extends React.Component {
 				<form onSubmit={this.onFormSubmit} className="ui form">
 					<div className="field">
             <input id="search" autoCapitalize="none" autoComplete="off" autoCorrect="off" name="search_query" tabIndex="0" type="text" spellCheck="false" placeholder="Search" aria-label="Search" aria-haspopup="false" role="combobox" aria-autocomplete="list" dir="ltr" className="ytd-searchbox" />
+            <FontAwesomeIcon icon={faSearch} />
+            <input id="searchSubmit" type="submit" value=""/>
 					</div>
 				</form>
 			</div>

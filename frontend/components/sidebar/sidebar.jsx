@@ -23,7 +23,7 @@ class Sidebar extends React.Component{
             
           </li>
           <li className={"sideNavItem signIn"}>
-            <Link to="/login"><FontAwesomeIcon icon={faUserCheck} />Log In</Link>
+            <Link to="/login">Log In</Link>
           </li>
           <li className={"sideNavItem bestOf"}>
             <ul>
