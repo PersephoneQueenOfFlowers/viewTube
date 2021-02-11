@@ -1,5 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, 
+        faUserCheck, 
+        faMusic, 
+        faTrophy, 
+        faDiceD6,
+        faFilm,
+        faNewspaper } from '@fortAwesome/free-solid-svg-icons';
 
 class Sidebar extends React.Component{
   constructor(props){
@@ -11,30 +19,28 @@ class Sidebar extends React.Component{
       <div className={"sidebar"}>
         <ul className={"sideNav"}>
           <li className={"sideNavItem home"}>
-            <Link to="/">Home</Link>
+            <Link to="/"><FontAwesomeIcon icon={faHome} />Home</Link>
+            
           </li>
           <li className={"sideNavItem signIn"}>
-            <Link to="/login">Log In</Link>
+            <Link to="/login"><FontAwesomeIcon icon={faUserCheck} />Log In</Link>
           </li>
           <li className={"sideNavItem bestOf"}>
             <ul>
               <li>
-                Music
+                <FontAwesomeIcon icon={faMusic} />Music
               </li>
               <li>
-                Sports
+                <FontAwesomeIcon icon={faTrophy} />Sports
               </li>
               <li>
-                Gaming
+                <FontAwesomeIcon icon={faDiceD6} />Gaming
               </li>
               <li>
-                Movies &amp; Shows
+                <FontAwesomeIcon icon={faFilm} />Movies &amp; Shows
               </li>
               <li>
-                News
-              </li>
-              <li>
-                Live
+                <FontAwesomeIcon icon={faNewspaper} />News
               </li>
             </ul>
           </li>

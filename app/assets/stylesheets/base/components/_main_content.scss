@@ -1,5 +1,11 @@
 .home {
   display:flex;
+  #hero {
+    background-image: url('/../../images/viewTubeHero.png');
+    background-size: cover;
+    width: 100%;
+    height:auto;
+  }
 }
 
 .sidebar{

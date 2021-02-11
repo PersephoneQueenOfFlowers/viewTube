@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Signup from '../session/signup';
 import SearchBar from './searchbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortAwesome/free-solid-svg-icons';
+
 // import PersonIcon from '../../../app/assets/images/person_icon.svg';
 
 export default ({ currentUser, logout }) => {
@@ -13,7 +16,9 @@ const display = currentUser ? (
     </div>
   ) : (
     <div className={'nav'}> 
-      <div className={'left'}><h2>viewTube</h2></div>
+      <div className={'left'}>
+        <h2>vi<FontAwesomeIcon icon={faEye} /><FontAwesomeIcon icon={faEye} />Tube</h2>
+      </div>
       <div className={'center'}> <SearchBar /> </div> 
       <div className={'right'}> 
       <Link to="/signup">Sign Up</Link>
