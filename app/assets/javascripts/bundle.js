@@ -1680,8 +1680,6 @@ var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var KEY = 'AIzaSyCwK9g3u1pDVwsaipVwWQXST_4YY24Q2HY';
-
 exports.default = _axios2.default.create({
   baseURL: 'https://www.googleapis.com/youtube/v3',
   params: {

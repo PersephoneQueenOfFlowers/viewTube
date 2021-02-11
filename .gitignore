@@ -6,7 +6,7 @@
 
 # ignore youtube.js file
 
-/frontend/utils/youtube.js
+#/frontend/utils/*
 
 # Ignore bundler config.
 /.bundle
