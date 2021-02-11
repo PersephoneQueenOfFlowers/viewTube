@@ -466,10 +466,6 @@ var _searchbar = __webpack_require__(/*! ./searchbar */ "./frontend/components/n
 
 var _searchbar2 = _interopRequireDefault(_searchbar);
 
-var _reactFontawesome = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
-
-var _freeSolidSvgIcons = __webpack_require__(/*! @fortAwesome/free-solid-svg-icons */ "./node_modules/@fortAwesome/free-solid-svg-icons/index.es.js");
-
 var _login = __webpack_require__(/*! ../session/login */ "./frontend/components/session/login.jsx");
 
 var _login2 = _interopRequireDefault(_login);

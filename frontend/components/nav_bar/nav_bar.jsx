@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Signup from '../session/signup';
 import SearchBar from './searchbar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortAwesome/free-solid-svg-icons';
 import Login from '../session/login';
 
 export default ({ currentUser, logout }) => {
