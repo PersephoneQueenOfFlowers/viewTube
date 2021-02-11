@@ -482,18 +482,34 @@ exports.default = function (_ref) {
 
   var display = currentUser ? _react2.default.createElement(
     'div',
-    null,
+    { className: 'nav' },
     _react2.default.createElement(
-      'h3',
-      null,
-      'Welcome ',
-      currentUser.username,
-      '!'
+      'div',
+      { className: 'left' },
+      _react2.default.createElement('span', { className: "logo" }),
+      _react2.default.createElement(
+        'h3',
+        null,
+        'Welcome ',
+        currentUser.username,
+        '!'
+      )
     ),
     _react2.default.createElement(
-      'button',
-      { onClick: logout },
-      'Logout'
+      'div',
+      { className: 'center' },
+      ' ',
+      _react2.default.createElement(_searchbar2.default, null),
+      ' '
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'right' },
+      _react2.default.createElement(
+        'button',
+        { onClick: logout },
+        'Logout'
+      )
     )
   ) : _react2.default.createElement(
     'div',

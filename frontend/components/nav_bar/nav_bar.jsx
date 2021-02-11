@@ -10,9 +10,15 @@ import { faEye } from '@fortAwesome/free-solid-svg-icons';
 export default ({ currentUser, logout }) => {
 
 const display = currentUser ? (
-    <div>
-      <h3>Welcome {currentUser.username}!</h3>
-      <button onClick={logout}>Logout</button>
+    <div className={'nav'}>
+      <div className={'left'}>
+        <span className={"logo"}></span>
+        <h3>Welcome {currentUser.username}!</h3>
+      </div>
+      <div className={'center'}> <SearchBar /> </div> 
+      <div className={'right'}>
+          <button onClick={logout}>Logout</button>
+      </div>
     </div>
   ) : (
     <div className={'nav'}> 
