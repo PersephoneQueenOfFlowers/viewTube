@@ -12,10 +12,11 @@ const display = currentUser ? (
         <span className={"logo"}></span>
         <h3>Welcome {currentUser.username}!</h3>
       </div>
-      <div className={'center'}> <SearchBar /> </div>
-      <div className={'right'}> 
-      <button onClick={logout}>Logout</button>
-    </div>
+
+      <div className={'center'}> <SearchBar /> </div> 
+      <div className={'right'}>
+          <button onClick={logout}>Logout</button>
+      </div>
     </div>
   ) : (
     <div className={'nav'}> 
