@@ -660,8 +660,21 @@ var SearchBar = function (_React$Component) {
 					_react2.default.createElement(
 						'div',
 						{ className: 'field' },
-						_react2.default.createElement('input', { id: 'search', autoCapitalize: 'none', autoComplete: 'off', autoCorrect: 'off', name: 'search_query', tabIndex: '0', type: 'text', spellCheck: 'false', placeholder: 'Search', 'aria-label': 'Search', 'aria-haspopup': 'false', role: 'combobox', 'aria-autocomplete': 'list', dir: 'ltr', className: 'ytd-searchbox' }),
-						_react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faSearch }),
+						_react2.default.createElement('input', { id: 'search',
+							autoCapitalize: 'none',
+							autoComplete: 'off',
+							autoCorrect: 'off',
+							name: 'search_query',
+							tabIndex: '0',
+							type: 'text',
+							spellCheck: 'false',
+							placeholder: 'Search',
+							'aria-label': 'Search',
+							'aria-haspopup': 'false',
+							role: 'combobox',
+							'aria-autocomplete': 'list',
+							dir: 'ltr',
+							className: 'ytd-searchbox' }),
 						_react2.default.createElement('input', { id: 'searchSubmit', type: 'submit', value: '' })
 					)
 				)
