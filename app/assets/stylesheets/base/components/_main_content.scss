@@ -1,10 +1,11 @@
 .home {
   display:flex;
   #hero {
-    background-image: url('/../../images/viewTubeHero.png');
-    background-size: cover;
+    background-image: url('./viewTubeHero.png');
+    background-size: 96.5%;
     width: 100%;
-    height:auto;
+    height: 250px;
+    background-repeat: no-repeat;
   }
 }
 
