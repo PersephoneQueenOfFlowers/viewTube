@@ -24,7 +24,7 @@
       padding: 0px 30px;
       &:before {
         content: '';
-        background-image: url('youTubeLogin.png');
+        background-image: image-url('youTubeLogin.png');
         position: absolute;
         top: -7.25px;
         left: -6px; 
@@ -47,7 +47,7 @@
       padding: 0px 30px;
       &:before {
         content: '';
-        background-image: url('home.png');
+        // background-image: url(image-url('home.png'));
         position: absolute;
         top: -7.25px;
         left: -6px; 
@@ -81,25 +81,25 @@
         // }
       }
       &:first-child{
-        background-image: url(music.png);
+        // background-image: url(image-url('music.png'));
         background-repeat: no-repeat;
         background-size: 40px;
         background-position: 10px;
       }
       &:nth-child(2):before{
-        background-image: url(sports.png);
+        // background-image: url(image-url('sports.png'));
         background-repeat: no-repeat;
       }
       &:nth-child(3):before{
-        background-image: url(gaming.png);
+        // background-image: url(image-url('gaming.png'));
         background-repeat: no-repeat;
       }
       &:nth-child(4):before{
-        background-image: url(movies.png);
+        // background-image: url(image-url('movies.png'));
         background-repeat: no-repeat;
       }
       &:nth-child(5):before{
-        background-image: url(news.png);
+        // background-image: url(image-url('news.png'));
         background-repeat: no-repeat;
         background-position: -3px;
       }
