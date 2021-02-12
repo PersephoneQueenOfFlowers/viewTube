@@ -687,14 +687,80 @@ exports.default = SearchBar;
 
 /***/ }),
 
+/***/ "./frontend/components/nav_bar/welcome_bar.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/nav_bar/welcome_bar.jsx ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _nav_bar = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
+
+var _nav_bar2 = _interopRequireDefault(_nav_bar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (_ref) {
+  var user = _ref.user;
+  return _react2.default.createElement(
+    'header',
+    { className: 'nav-bar' },
+    _react2.default.createElement(
+      'h4',
+      null,
+      'Welcome ',
+      user.username,
+      '!'
+    )
+  );
+};
+
+/***/ }),
+
 /***/ "./frontend/components/nav_bar/welcome_bar_container.jsx":
 /*!***************************************************************!*\
   !*** ./frontend/components/nav_bar/welcome_bar_container.jsx ***!
   \***************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open '/Users/sethschoenfeld/Desktop/viewTube/frontend/components/nav_bar/welcome_bar_container.jsx'");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _welcome_bar = __webpack_require__(/*! ./welcome_bar */ "./frontend/components/nav_bar/welcome_bar.jsx");
+
+var _welcome_bar2 = _interopRequireDefault(_welcome_bar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    user: state.session.currentUser
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(_welcome_bar2.default);
 
 /***/ }),
 
@@ -1679,6 +1745,8 @@ var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var KEY = 'AIzaSyCwK9g3u1pDVwsaipVwWQXST_4YY24Q2HY';
 
 exports.default = _axios2.default.create({
   baseURL: 'https://www.googleapis.com/youtube/v3',

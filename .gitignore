@@ -5,7 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # ignore youtube.js file
-#/frontend/utils
+/frontend/utils
 
 # Ignore bundler config.
 /.bundle
