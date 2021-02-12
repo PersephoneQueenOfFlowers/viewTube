@@ -613,6 +613,10 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactFontawesome = __webpack_require__(/*! @fortawesome/react-fontawesome */ "./node_modules/@fortawesome/react-fontawesome/index.es.js");
+
+var _freeSolidSvgIcons = __webpack_require__(/*! @fortAwesome/free-solid-svg-icons */ "./node_modules/@fortAwesome/free-solid-svg-icons/index.es.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -621,8 +625,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortAwesome/free-solid-svg-icons';
 var SearchBar = function (_React$Component) {
 	_inherits(SearchBar, _React$Component);
 
@@ -633,7 +635,7 @@ var SearchBar = function (_React$Component) {
 	}
 
 	_createClass(SearchBar, [{
-		key: "render",
+		key: 'render',
 
 
 		// state = {term: ''};
@@ -650,30 +652,30 @@ var SearchBar = function (_React$Component) {
 
 		value: function render() {
 			return _react2.default.createElement(
-				"div",
-				{ className: "search-bar ui segment" },
+				'div',
+				{ className: 'search-bar ui segment' },
 				_react2.default.createElement(
-					"form",
-					{ onSubmit: this.onFormSubmit, className: "ui form" },
+					'form',
+					{ onSubmit: this.onFormSubmit, className: 'ui form' },
 					_react2.default.createElement(
-						"div",
-						{ className: "field" },
-						_react2.default.createElement("input", { id: "search",
-							autoCapitalize: "none",
-							autoComplete: "off",
-							autoCorrect: "off",
-							name: "search_query",
-							tabIndex: "0",
-							type: "text",
-							spellCheck: "false",
-							placeholder: "Search",
-							"aria-label": "Search",
-							"aria-haspopup": "false",
-							role: "combobox",
-							"aria-autocomplete": "list",
-							dir: "ltr",
-							className: "ytd-searchbox" }),
-						_react2.default.createElement("input", { id: "searchSubmit", type: "submit", value: "" })
+						'div',
+						{ className: 'field' },
+						_react2.default.createElement('input', { id: 'search',
+							autoCapitalize: 'none',
+							autoComplete: 'off',
+							autoCorrect: 'off',
+							name: 'search_query',
+							tabIndex: '0',
+							type: 'text',
+							spellCheck: 'false',
+							placeholder: 'Search',
+							'aria-label': 'Search',
+							'aria-haspopup': 'false',
+							role: 'combobox',
+							'aria-autocomplete': 'list',
+							dir: 'ltr',
+							className: 'ytd-searchbox' }),
+						_react2.default.createElement('input', { id: 'searchSubmit', type: 'submit', value: '' })
 					)
 				)
 			);
