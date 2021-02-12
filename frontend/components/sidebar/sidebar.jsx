@@ -1,45 +1,49 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faHome, 
-//         faMusic, 
-//         faTrophy, 
-//         faDiceD6,
-//         faFilm,
-//         faNewspaper } from '@fortAwesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faHome,
+  faUserCheck,
+  faMusic,
+  faTrophy,
+  faDiceD6,
+  faFilm,
+  faNewspaper
+} from '@fortAwesome/free-solid-svg-icons';
 
-class Sidebar extends React.Component{
-  constructor(props){
+class Sidebar extends React.Component {
+  constructor(props) {
     super(props)
   }
 
-  render(){
+  render() {
     return (
       <div className={"sidebar"}>
         <ul className={"sideNav"}>
           <li className={"sideNavItem home"}>
-            <Link to="/">Home</Link>
+            <Link to="/"><FontAwesomeIcon icon={faHome} />Home</Link>
+
           </li>
           <li className={"sideNavItem signIn"}>
-            <h2>Log in to like videos <br /> and comment</h2>
+            <h2>Log in to like videos <br />and comment</h2>
             <Link to="/login">Log In</Link>
           </li>
           <li className={"sideNavItem bestOf"}>
             <ul>
               <li>
-                Music
+                <FontAwesomeIcon icon={faMusic} />Music
               </li>
               <li>
-                Sports
+                <FontAwesomeIcon icon={faTrophy} />Sports
               </li>
               <li>
-                Gaming
+                <FontAwesomeIcon icon={faDiceD6} />Gaming
               </li>
               <li>
-                Movies &amp; Shows
+                <FontAwesomeIcon icon={faFilm} />Movies &amp; Shows
               </li>
               <li>
-                News
+                <FontAwesomeIcon icon={faNewspaper} />News
               </li>
             </ul>
           </li>
