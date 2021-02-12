@@ -34,6 +34,7 @@ gem 'jquery-rails'
 # gem 'capistrano-rails', group: :development
 gem 'bcrypt'
 
+gem 'font-awesome-rails'
 
 gem 'listen', '>= 3.0.5', '< 3.2'
 # Reduces boot times through caching; required in config/boot.rb
