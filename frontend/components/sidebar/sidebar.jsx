@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faMusic, faTrophy, faDiceD6, faFilm, faNewspaper } from '@fortAwesome/free-solid-svg-icons';
+import { faHome, faMusic, faTrophy, faDiceD6, faFilm, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 
 class Sidebar extends React.Component {
   constructor(props) {
