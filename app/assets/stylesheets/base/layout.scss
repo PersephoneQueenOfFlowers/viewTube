@@ -50,12 +50,14 @@ body{
         font-size: 2rem;
       }
       form {
-        height: 200px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         &.login{
           height: 165px;
+        }
+        &.signup {
+          height: 225px;
         }
         div{
           display:flex;

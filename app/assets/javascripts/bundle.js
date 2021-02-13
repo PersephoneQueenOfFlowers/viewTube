@@ -1088,7 +1088,7 @@ var Signup = function (_React$Component) {
             ),
             _react2.default.createElement(
               'form',
-              null,
+              { className: 'signup' },
               _react2.default.createElement(
                 'div',
                 null,

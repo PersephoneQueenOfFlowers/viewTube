@@ -45,7 +45,7 @@ class Signup extends React.Component {
           <div className="session-form">
         <h2>Sign Up!</h2>
             <span className="errors">{this.renderErrors()}</span>
-        <form>
+        <form className="signup">
           <div>
               <label>Username:</label>
               <input
