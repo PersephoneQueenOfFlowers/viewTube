@@ -7,6 +7,7 @@ import Hero from '../hero';
 class Home extends React.Component{
   constructor(props){
     super(props)
+    $(".nav .right").css("visibility", "visible");
     this.state = {
       videos: [
         {

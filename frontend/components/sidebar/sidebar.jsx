@@ -18,7 +18,12 @@ class Sidebar extends React.Component {
           </li>
           <li className={"sideNavItem signIn"}>
             <h2>Log in to like videos <br />and comment</h2>
-            <Link to="/login">Log In</Link>
+            <Link className={'login'} to={{
+              pathname: "/login",
+              aboutProps: {
+                demo: false
+              }
+            }}>login</Link>
           </li>
           <li className={"sideNavItem bestOf"}>
             <ul>

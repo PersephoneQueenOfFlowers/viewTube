@@ -4,12 +4,22 @@ import Signup from '../session/signup';
 import SearchBar from './searchbar';
 import Login from '../session/login';
 
-export default ({ currentUser, logout }) => {
+export default ({ currentUser, logout, login }) => {
 
-const display = currentUser ? (
+  const formUser = { 
+    "username": "dave",
+    "password": "123456" 
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(formUser);
+  }
+
+  const display = currentUser ? (
     <div className={'nav'}>
       <div className={'left'}>
-        <span className={"logo"}></span>
+      <Link to="/"><span className={"logo"}> </span></Link>
         <h3>Welcome {currentUser.username}!</h3>
       </div>
 
@@ -21,12 +31,13 @@ const display = currentUser ? (
   ) : (
     <div className={'nav'}> 
       <div className={'left'}>
-      <span className={"logo"}></span>
+        <Link to="/"><span className={"logo"}></span></Link>
       </div>
       <div className={'center'}> <SearchBar /> </div> 
       <div className={'right'}> 
-      <Link to="/signup">Sign Up</Link>
-      <Link className={'login'} to="/login">Log In</Link>
+        <button className={'login demo'} onClick={ e => handleClick(e)}>demo login</button>
+        <Link to="/signup">Sign Up</Link>
+        <Link className={'login'} to="/login">login</Link>
       </div>
     </div>
   );

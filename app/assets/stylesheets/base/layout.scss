@@ -11,3 +11,72 @@ body{
 .home .four.column{
   background-color: #181818;
 }
+
+.form-outer-container {
+    height: 400px;
+    width: 350px;
+    margin: 0 auto;
+    margin-top: 10%;
+    // &.login {
+    //   height:unset;
+    // }
+    .form-inner-container {
+        box-sizing: border-box;
+        padding: 40px;
+        background-color: #121212;
+        border-radius: 3px;
+        box-shadow: inset;
+        border: 1px solid #121212;
+        background-color: #202020;
+        border-style: inset;
+        box-shadow: 0px 1px 4px 3px;
+        .session-form{
+          display: flex;
+          flex-direction: column;
+          min-height: 300px;
+          color: #fff;
+          &.login {
+            min-height: 250px;
+          }
+        h2 {
+          margin: 10px 0 20px;
+          font-size: 2rem;
+        }
+        form {
+          height: 200px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          &.login{
+            height: 165px;
+          }
+          div{
+            display:flex;
+            flex-direction:column;
+            justify-content:space-around;
+            label{
+              font-weight: 100;
+              padding-bottom: 5px;
+            }
+            &:last-child div, &:last-child {
+              margin-top: 20px;
+              button{
+                max-width: 50%;
+                color: rgba(39, 147, 230, 0.6);
+                background-color: transparent;
+                background-size: 15px 15px;
+                padding: 7px 21px;
+                border-radius: 3px;
+                margin: 0 0.29em;
+                box-sizing: border-box;
+                border: 1px solid;
+                text-decoration: none;
+                font-size: 1.6rem;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+    }
+}

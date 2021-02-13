@@ -99,12 +99,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.login = exports.createNewUser = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
+exports.logout = exports.login = exports.createNewUser = exports.removeErrors = exports.REMOVE_ERRORS = exports.RECEIVE_SESSION_ERRORS = exports.LOGOUT_CURRENT_USER = exports.RECEIVE_CURRENT_USER = undefined;
 
 var _session = __webpack_require__(/*! ../utils/session */ "./frontend/utils/session.js");
 
 var RECEIVE_CURRENT_USER = exports.RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = exports.LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
+var RECEIVE_SESSION_ERRORS = exports.RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
+var REMOVE_ERRORS = exports.REMOVE_ERRORS = "REMOVE_ERRORS";
 
 var receiveCurrentUser = function receiveCurrentUser(user) {
   return {
@@ -119,10 +121,25 @@ var logoutCurrentUser = function logoutCurrentUser() {
   };
 };
 
+var receiveErrors = function receiveErrors(errors) {
+  return {
+    type: RECEIVE_SESSION_ERRORS,
+    errors: errors
+  };
+};
+
+var removeErrors = exports.removeErrors = function removeErrors() {
+  return {
+    type: REMOVE_ERRORS
+  };
+};
+
 var createNewUser = exports.createNewUser = function createNewUser(formUser) {
   return function (dispatch) {
     return (0, _session.postUser)(formUser).then(function (user) {
       return dispatch(receiveCurrentUser(user));
+    }).fail(function (error) {
+      return dispatch(receiveErrors(error.responseJSON));
     });
   };
 };
@@ -131,6 +148,8 @@ var login = exports.login = function login(formUser) {
   return function (dispatch) {
     return (0, _session.postSession)(formUser).then(function (user) {
       return dispatch(receiveCurrentUser(user));
+    }).fail(function (error) {
+      return dispatch(receiveErrors(error.responseJSON));
     });
   };
 };
@@ -163,10 +182,6 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _welcome_bar_container = __webpack_require__(/*! ./nav_bar/welcome_bar_container */ "./frontend/components/nav_bar/welcome_bar_container.jsx");
-
-var _welcome_bar_container2 = _interopRequireDefault(_welcome_bar_container);
-
 var _nav_bar_container = __webpack_require__(/*! ./nav_bar/nav_bar_container */ "./frontend/components/nav_bar/nav_bar_container.jsx");
 
 var _nav_bar_container2 = _interopRequireDefault(_nav_bar_container);
@@ -189,14 +204,24 @@ var _route_util = __webpack_require__(/*! ../utils/route_util */ "./frontend/uti
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import WelcomeBar from './nav_bar/welcome_bar_container';
 exports.default = function () {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _nav_bar_container2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _signup_container2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _login_container2.default })
+    _react2.default.createElement(
+      'header',
+      null,
+      _react2.default.createElement(_nav_bar_container2.default, null)
+    ),
+    _react2.default.createElement(
+      _reactRouterDom.Switch,
+      null,
+      _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _signup_container2.default }),
+      _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _login_container2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
+      _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
+    )
   );
 };
 
@@ -310,6 +335,7 @@ var Home = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
+    $(".nav .right").css("visibility", "visible");
     _this.state = {
       videos: [{
         id: "PuTqWxuAazI",
@@ -474,8 +500,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (_ref) {
   var currentUser = _ref.currentUser,
-      logout = _ref.logout;
+      logout = _ref.logout,
+      login = _ref.login;
 
+
+  var formUser = {
+    "username": "dave",
+    "password": "123456"
+  };
+
+  var handleClick = function handleClick(e) {
+    e.preventDefault();
+    login(formUser);
+  };
 
   var display = currentUser ? _react2.default.createElement(
     'div',
@@ -483,7 +520,15 @@ exports.default = function (_ref) {
     _react2.default.createElement(
       'div',
       { className: 'left' },
-      _react2.default.createElement('span', { className: "logo" }),
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/' },
+        _react2.default.createElement(
+          'span',
+          { className: "logo" },
+          ' '
+        )
+      ),
       _react2.default.createElement(
         'h3',
         null,
@@ -514,7 +559,11 @@ exports.default = function (_ref) {
     _react2.default.createElement(
       'div',
       { className: 'left' },
-      _react2.default.createElement('span', { className: "logo" })
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { to: '/' },
+        _react2.default.createElement('span', { className: "logo" })
+      )
     ),
     _react2.default.createElement(
       'div',
@@ -527,6 +576,13 @@ exports.default = function (_ref) {
       'div',
       { className: 'right' },
       _react2.default.createElement(
+        'button',
+        { className: 'login demo', onClick: function onClick(e) {
+            return handleClick(e);
+          } },
+        'demo login'
+      ),
+      _react2.default.createElement(
         _reactRouterDom.Link,
         { to: '/signup' },
         'Sign Up'
@@ -534,7 +590,7 @@ exports.default = function (_ref) {
       _react2.default.createElement(
         _reactRouterDom.Link,
         { className: 'login', to: '/login' },
-        'Log In'
+        'login'
       )
     )
   );
@@ -585,6 +641,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     logout: function logout() {
       return dispatch((0, _session.logout)());
+    },
+    login: function login(user) {
+      return dispatch((0, _session.login)(user));
     }
   };
 };
@@ -687,83 +746,6 @@ exports.default = SearchBar;
 
 /***/ }),
 
-/***/ "./frontend/components/nav_bar/welcome_bar.jsx":
-/*!*****************************************************!*\
-  !*** ./frontend/components/nav_bar/welcome_bar.jsx ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _nav_bar = __webpack_require__(/*! ./nav_bar */ "./frontend/components/nav_bar/nav_bar.jsx");
-
-var _nav_bar2 = _interopRequireDefault(_nav_bar);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (_ref) {
-  var user = _ref.user;
-  return _react2.default.createElement(
-    'header',
-    { className: 'nav-bar' },
-    _react2.default.createElement(
-      'h4',
-      null,
-      'Welcome ',
-      user.username,
-      '!'
-    )
-  );
-};
-
-/***/ }),
-
-/***/ "./frontend/components/nav_bar/welcome_bar_container.jsx":
-/*!***************************************************************!*\
-  !*** ./frontend/components/nav_bar/welcome_bar_container.jsx ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-
-var _welcome_bar = __webpack_require__(/*! ./welcome_bar */ "./frontend/components/nav_bar/welcome_bar.jsx");
-
-var _welcome_bar2 = _interopRequireDefault(_welcome_bar);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    user: state.session.currentUser
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(_welcome_bar2.default);
-
-/***/ }),
-
 /***/ "./frontend/components/root.jsx":
 /*!**************************************!*\
   !*** ./frontend/components/root.jsx ***!
@@ -849,8 +831,8 @@ var Login = function (_React$Component) {
       username: '',
       password: ''
     };
-
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    $(".nav .right").css("visibility", "hidden");
     return _this;
   }
 
@@ -867,46 +849,81 @@ var Login = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.login(this.state).then(this.props.history.push());
+      this.props.login(this.state).then(this.props.history.push()).fail();
+    }
+  }, {
+    key: 'renderErrors',
+    value: function renderErrors() {
+      if (this.props.errors.length > 0) {
+        return _react2.default.createElement(
+          'span',
+          { className: 'errors' },
+          this.props.errors[0]
+        );
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      // console.log(this.props);
       return _react2.default.createElement(
-        'div',
-        { className: 'session-form' },
+        'section',
+        { className: 'form-outer-container' },
         _react2.default.createElement(
-          'h2',
-          null,
-          'log in'
-        ),
-        _react2.default.createElement(
-          'form',
-          null,
+          'div',
+          { className: 'form-inner-container' },
           _react2.default.createElement(
-            'label',
-            null,
-            'Username:',
-            _react2.default.createElement('input', {
-              type: 'text',
-              value: this.state.username,
-              onChange: this.handleInput('username')
-            })
-          ),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Password:',
-            _react2.default.createElement('input', {
-              type: 'password',
-              value: this.state.password,
-              onChange: this.handleInput('password')
-            }),
+            'div',
+            { className: 'session-form login' },
             _react2.default.createElement(
-              'button',
-              { onClick: this.handleSubmit },
-              'Log In!'
+              'h2',
+              null,
+              'log in'
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'errors' },
+              this.renderErrors()
+            ),
+            _react2.default.createElement(
+              'form',
+              { className: 'login' },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'Username:'
+                ),
+                _react2.default.createElement('input', {
+                  type: 'text',
+                  value: this.state.username,
+                  onChange: this.handleInput('username')
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'Password:'
+                ),
+                _react2.default.createElement('input', {
+                  type: 'password',
+                  value: this.state.password,
+                  onChange: this.handleInput('password')
+                }),
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'button',
+                    { onClick: this.handleSubmit },
+                    'Log In!'
+                  )
+                )
+              )
             )
           )
         )
@@ -949,6 +966,14 @@ var _login3 = _interopRequireDefault(_login2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var mapStateToProps = function mapStateToProps(_ref) {
+  var errors = _ref.errors;
+
+  return {
+    errors: errors
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     login: function login(formUser) {
@@ -957,7 +982,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(_login3.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_login3.default);
 
 /***/ }),
 
@@ -1006,6 +1031,7 @@ var Signup = function (_React$Component) {
     };
 
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    $(".nav .right").css("visibility", "hidden");
     return _this;
   }
 
@@ -1022,55 +1048,95 @@ var Signup = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.createNewUser(this.state).then(this.props.history.push());
+      this.props.createNewUser(this.state).then(this.props.history.push()).fail($(".nav .right").css("visibility", "hidden"));
+    }
+  }, {
+    key: 'renderErrors',
+    value: function renderErrors() {
+      if (this.props.errors.length > 0) {
+        return _react2.default.createElement(
+          'span',
+          { className: 'errors' },
+          this.props.errors[0]
+        );
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'div',
-        { className: 'session-form' },
+        'section',
+        { className: 'form-outer-container' },
         _react2.default.createElement(
-          'h2',
-          null,
-          'Sign Up!'
-        ),
-        _react2.default.createElement(
-          'form',
-          null,
+          'div',
+          { className: 'form-inner-container' },
           _react2.default.createElement(
-            'label',
-            null,
-            'Username:',
-            _react2.default.createElement('input', {
-              type: 'text',
-              value: this.state.username,
-              onChange: this.handleInput('username')
-            })
-          ),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Email:',
-            _react2.default.createElement('input', {
-              type: 'text',
-              value: this.state.email,
-              onChange: this.handleInput('email')
-            })
-          ),
-          _react2.default.createElement(
-            'label',
-            null,
-            'Password:',
-            _react2.default.createElement('input', {
-              type: 'password',
-              value: this.state.password,
-              onChange: this.handleInput('password')
-            }),
+            'div',
+            { className: 'session-form' },
             _react2.default.createElement(
-              'button',
-              { onClick: this.handleSubmit },
+              'h2',
+              null,
               'Sign Up!'
+            ),
+            _react2.default.createElement(
+              'span',
+              { className: 'errors' },
+              this.renderErrors()
+            ),
+            _react2.default.createElement(
+              'form',
+              null,
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'Username:'
+                ),
+                _react2.default.createElement('input', {
+                  type: 'text',
+                  value: this.state.username,
+                  onChange: this.handleInput('username')
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'Email:'
+                ),
+                _react2.default.createElement('input', {
+                  type: 'text',
+                  value: this.state.email,
+                  onChange: this.handleInput('email')
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'Password: '
+                ),
+                _react2.default.createElement('input', {
+                  type: 'password',
+                  value: this.state.password,
+                  onChange: this.handleInput('password')
+                }),
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'button',
+                    { onClick: this.handleSubmit },
+                    'Sign Up!'
+                  )
+                )
+              )
             )
           )
         )
@@ -1109,15 +1175,29 @@ var _signup2 = _interopRequireDefault(_signup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var mapStateToProps = function mapStateToProps(_ref) {
+  var errors = _ref.errors;
+
+  return {
+    errors: errors
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createNewUser: function createNewUser(formUser) {
       return dispatch((0, _session.createNewUser)(formUser));
+    },
+    login: function login(formUser) {
+      return dispatch((0, _session.login)(formUser));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0, _session.removeErrors)());
     }
   };
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(_signup2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_signup2.default);
 
 // there is no part of state that this component will need to rely on for signing someone up.
 
@@ -1197,8 +1277,13 @@ var Sidebar = function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: '/login' },
-              'Log In'
+              { className: 'login', to: {
+                  pathname: "/login",
+                  aboutProps: {
+                    demo: false
+                  }
+                } },
+              'login'
             )
           ),
           _react2.default.createElement(
@@ -1452,6 +1537,43 @@ exports.default = (0, _redux.combineReducers)({
 
 /***/ }),
 
+/***/ "./frontend/reducers/errors.js":
+/*!*************************************!*\
+  !*** ./frontend/reducers/errors.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _session = __webpack_require__(/*! ../actions/session.js */ "./frontend/actions/session.js");
+
+var sessionErrorsReducer = function sessionErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case _session.RECEIVE_SESSION_ERRORS:
+      return action.errors;
+    case _session.RECEIVE_CURRENT_USER:
+      return [];
+    case _session.REMOVE_ERRORS:
+      return [];
+    default:
+      return state;
+  }
+};
+
+exports.default = sessionErrorsReducer;
+
+/***/ }),
+
 /***/ "./frontend/reducers/root.js":
 /*!***********************************!*\
   !*** ./frontend/reducers/root.js ***!
@@ -1476,11 +1598,16 @@ var _entities = __webpack_require__(/*! ./entities */ "./frontend/reducers/entit
 
 var _entities2 = _interopRequireDefault(_entities);
 
+var _errors = __webpack_require__(/*! ./errors */ "./frontend/reducers/errors.js");
+
+var _errors2 = _interopRequireDefault(_errors);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = (0, _redux.combineReducers)({
   entities: _entities2.default,
-  session: _session2.default
+  session: _session2.default,
+  errors: _errors2.default
 });
 
 /***/ }),
@@ -1595,7 +1722,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function () {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0, _redux.createStore)(_root2.default, preloadedState, (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_thunk2.default, _reduxLogger2.default)));
+  return (0, _redux.createStore)(_root2.default, preloadedState, (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_thunk2.default)));
 };
 
 /***/ }),
