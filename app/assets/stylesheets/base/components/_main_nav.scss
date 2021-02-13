@@ -73,6 +73,13 @@
     text-decoration: none;
     font-size: 1.6rem;
     font-weight: bold;
+    &:hover {
+      cursor: pointer;
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+    &:focus {
+      outline: none;
+    }
   }
   .field {
     position:relative;
