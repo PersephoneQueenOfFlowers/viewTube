@@ -61,9 +61,10 @@ class Login extends React.Component {
                   value={this.state.password}
                   onChange={this.handleInput('password')}
                 />
-                <div>
-                  <button onClick={this.handleSubmit}>Log In!</button>
-                </div>
+              </div>
+              
+              <div>
+                <button onClick={this.handleSubmit}>Log In!</button>
               </div>
             
             </form>

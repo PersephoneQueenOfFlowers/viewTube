@@ -916,15 +916,15 @@ var Login = function (_React$Component) {
                   type: 'password',
                   value: this.state.password,
                   onChange: this.handleInput('password')
-                }),
+                })
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
                 _react2.default.createElement(
-                  'div',
-                  null,
-                  _react2.default.createElement(
-                    'button',
-                    { onClick: this.handleSubmit },
-                    'Log In!'
-                  )
+                  'button',
+                  { onClick: this.handleSubmit },
+                  'Log In!'
                 )
               )
             )
