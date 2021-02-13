@@ -1,6 +1,6 @@
 import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSearch } from '@fortAwesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 class SearchBar extends React.Component {
 
 	// state = {term: ''};
@@ -35,6 +35,7 @@ class SearchBar extends React.Component {
                     aria-autocomplete="list" 
                     dir="ltr" 
                     className="ytd-searchbox" />
+            <FontAwesomeIcon icon={faSearch} />
             <input id="searchSubmit" type="submit" value=""/>
 					</div>
 				</form>

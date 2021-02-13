@@ -8,7 +8,7 @@ class Login extends React.Component {
       password: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-      $(".nav .right").css("visibility", "hidden");
+    $(".nav .right, .sideNav .signIn").css("visibility", "hidden");
   }
 
   handleInput(type) {
