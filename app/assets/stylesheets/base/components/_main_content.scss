@@ -12,9 +12,13 @@
 
 .sidebar{
   flex: 1;
+  position: fixed;
+  top: 65px;
+  left: 0;
 }
 .four.column {
   flex: 7;
+  margin-left: 190px;
 }
 
 .errors {
