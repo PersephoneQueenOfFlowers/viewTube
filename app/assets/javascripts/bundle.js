@@ -335,7 +335,7 @@ var Home = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-    $(".nav .right").css("visibility", "visible");
+    $(".nav .right, .nav .center").css("visibility", "visible");
     _this.state = {
       videos: [{
         id: "PuTqWxuAazI",
@@ -835,7 +835,7 @@ var Login = function (_React$Component) {
       password: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
-    $(".nav .right, .sideNav .signIn").css("visibility", "hidden");
+    $(".nav .right, .nav .center, .sideNav .signIn").css("visibility", "hidden");
     return _this;
   }
 
@@ -1034,7 +1034,7 @@ var Signup = function (_React$Component) {
     };
 
     _this.handleSubmit = _this.handleSubmit.bind(_this);
-    $(".nav .right").css("visibility", "hidden");
+    $(".nav .right, .nav .center").css("visibility", "hidden");
     return _this;
   }
 

@@ -10,7 +10,7 @@ class Signup extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    $(".nav .right").css("visibility", "hidden");
+    $(".nav .right, .nav .center").css("visibility", "hidden");
   }
 
   handleInput(type) {
