@@ -21,9 +21,11 @@ class Login extends React.Component {
     e.preventDefault();
     this.props.login(this.state)
       .then(
-        this.props.history.push(),
+        this.props.history.push()
+      )
+      .then(
         $(".home .navbar .sideNavItem.signIn").css("visibility", "hidden")
-      );
+      )
   }
 
   renderErrors() {
