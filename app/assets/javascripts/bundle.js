@@ -897,8 +897,11 @@ var Login = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.login(this.state).then(this.props.history.push()).then($(".home .navbar .sideNavItem.signIn").css("visibility", "hidden"));
+      this.props.login(this.state).then(this.props.history.push());
     }
+
+    // $(".home .navbar .sideNavItem.signIn").css("visibility", "hidden")
+
   }, {
     key: 'renderErrors',
     value: function renderErrors() {

@@ -22,12 +22,10 @@ class Login extends React.Component {
     this.props.login(this.state)
       .then(
         this.props.history.push()
-      )
-      .then(
-        $(".home .navbar .sideNavItem.signIn").css("visibility", "hidden")
-      )
+      );
   }
 
+  // $(".home .navbar .sideNavItem.signIn").css("visibility", "hidden")
   renderErrors() {
     if (this.props.errors.length > 0) {
       return (
