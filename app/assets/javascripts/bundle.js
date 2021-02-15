@@ -194,6 +194,10 @@ var _login_container = __webpack_require__(/*! ./session/login_container */ "./f
 
 var _login_container2 = _interopRequireDefault(_login_container);
 
+var _home_container = __webpack_require__(/*! ./home/home_container */ "./frontend/components/home/home_container.js");
+
+var _home_container2 = _interopRequireDefault(_home_container);
+
 var _home = __webpack_require__(/*! ./home/home */ "./frontend/components/home/home.jsx");
 
 var _home2 = _interopRequireDefault(_home);
@@ -204,7 +208,6 @@ var _route_util = __webpack_require__(/*! ../utils/route_util */ "./frontend/uti
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import WelcomeBar from './nav_bar/welcome_bar_container';
 exports.default = function () {
   return _react2.default.createElement(
     'div',
@@ -219,11 +222,12 @@ exports.default = function () {
       null,
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _signup_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _login_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home_container2.default }),
       _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
     )
   );
 };
+// import WelcomeBar from './nav_bar/welcome_bar_container';
 
 /***/ }),
 
@@ -308,8 +312,6 @@ var _video_list2 = _interopRequireDefault(_video_list);
 
 var _youtube = __webpack_require__(/*! ../../utils/youtube */ "./frontend/utils/youtube.js");
 
-var _youtube2 = _interopRequireDefault(_youtube);
-
 var _sidebar = __webpack_require__(/*! ../sidebar/sidebar */ "./frontend/components/sidebar/sidebar.jsx");
 
 var _sidebar2 = _interopRequireDefault(_sidebar);
@@ -335,8 +337,9 @@ var Home = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
-    $(".nav .right, .nav .center").css("visibility", "visible");
+    $(".nav .right *, .nav .center").css("visibility", "visible");
     _this.state = {
+      currentUser: _this.props.currentUser ? true : false,
       videos: [{
         id: "PuTqWxuAazI",
         snippet: {
@@ -434,7 +437,6 @@ var Home = function (_React$Component) {
           url: "https://i.ytimg.com/vi/e9bQ70RHKj8/mqdefault.jpg"
         }
       }], selectedVideo: null };
-    // this.onSubmit = this.onSubmit.bind(this);
     return _this;
   }
 
@@ -444,7 +446,7 @@ var Home = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'home' },
-        _react2.default.createElement(_sidebar2.default, null),
+        _react2.default.createElement(_sidebar2.default, { currentUser: this.props.currentUser }),
         _react2.default.createElement(
           'div',
           { className: 'four column' },
@@ -461,6 +463,49 @@ var Home = function (_React$Component) {
 exports.default = Home;
 
 // onVideoSelect = { this.onVideoSelect }
+
+/***/ }),
+
+/***/ "./frontend/components/home/home_container.js":
+/*!****************************************************!*\
+  !*** ./frontend/components/home/home_container.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _session = __webpack_require__(/*! ../../actions/session */ "./frontend/actions/session.js");
+
+var _home = __webpack_require__(/*! ./home */ "./frontend/components/home/home.jsx");
+
+var _home2 = _interopRequireDefault(_home);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.session.currentUser
+  };
+};
+
+// const mapDispatchToProps = dispatch => ({
+//   login: formUser => dispatch(login(formUser)),
+//   removeErrors: () => dispatch(removeErrors())
+// });
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_home2.default);
 
 /***/ }),
 
@@ -584,13 +629,13 @@ exports.default = function (_ref) {
       ),
       _react2.default.createElement(
         _reactRouterDom.Link,
-        { to: '/signup' },
+        { className: 'signup', to: '/signup' },
         'Sign Up'
       ),
       _react2.default.createElement(
         _reactRouterDom.Link,
         { className: 'login', to: '/login' },
-        'login'
+        'Login'
       )
     )
   );
@@ -835,7 +880,7 @@ var Login = function (_React$Component) {
       password: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
-    $(".nav .right, .nav .center, .sideNav .signIn").css("visibility", "hidden");
+    $(".nav .right .login, .nav .center, .sideNav .signIn").css("visibility", "hidden");
     return _this;
   }
 
@@ -852,7 +897,7 @@ var Login = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.login(this.state).then(this.props.history.push()).fail();
+      this.props.login(this.state).then(this.props.history.push(), $(".home .navbar .sideNavItem.signIn").css("visibility", "hidden"));
     }
   }, {
     key: 'renderErrors',
@@ -864,6 +909,11 @@ var Login = function (_React$Component) {
           this.props.errors[0]
         );
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.props.removeErrors();
     }
   }, {
     key: 'render',
@@ -981,6 +1031,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     login: function login(formUser) {
       return dispatch((0, _session.login)(formUser));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0, _session.removeErrors)());
     }
   };
 };
@@ -1034,7 +1087,7 @@ var Signup = function (_React$Component) {
     };
 
     _this.handleSubmit = _this.handleSubmit.bind(_this);
-    $(".nav .right, .nav .center").css("visibility", "hidden");
+    $(".nav .right .signup, .nav .center").css("visibility", "hidden");
     return _this;
   }
 
@@ -1063,6 +1116,11 @@ var Signup = function (_React$Component) {
           this.props.errors[0]
         );
       }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.props.removeErrors();
     }
   }, {
     key: 'render',
@@ -1252,6 +1310,29 @@ var Sidebar = function (_React$Component) {
   _createClass(Sidebar, [{
     key: 'render',
     value: function render() {
+
+      var displayLogin = this.props.currentUser ? null : _react2.default.createElement(
+        'li',
+        { className: 'sideNavItem signIn ' + this.state.signedIn },
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Log in to like videos ',
+          _react2.default.createElement('br', null),
+          'and comment'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { className: 'login', to: {
+              pathname: "/login",
+              aboutProps: {
+                demo: false
+              }
+            } },
+          'login'
+        )
+      );
+
       return _react2.default.createElement(
         'div',
         { className: "sidebar" },
@@ -1268,27 +1349,7 @@ var Sidebar = function (_React$Component) {
               'Home'
             )
           ),
-          _react2.default.createElement(
-            'li',
-            { className: "sideNavItem signIn" },
-            _react2.default.createElement(
-              'h2',
-              null,
-              'Log in to like videos ',
-              _react2.default.createElement('br', null),
-              'and comment'
-            ),
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { className: 'login', to: {
-                  pathname: "/login",
-                  aboutProps: {
-                    demo: false
-                  }
-                } },
-              'login'
-            )
-          ),
+          displayLogin,
           _react2.default.createElement(
             'li',
             { className: "sideNavItem bestOf" },
@@ -1640,7 +1701,6 @@ exports.default = function () {
   var action = arguments[1];
 
   Object.freeze(state);
-  console.log("action: " + action);
   switch (action.type) {
     case _session.RECEIVE_CURRENT_USER:
       // const currentUser = action.user
@@ -1871,6 +1931,7 @@ var deleteSession = exports.deleteSession = function deleteSession() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.fetchVids = undefined;
 
 var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
@@ -1880,15 +1941,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var KEY = 'AIzaSyCwK9g3u1pDVwsaipVwWQXST_4YY24Q2HY';
 
-exports.default = _axios2.default.create({
-  baseURL: 'https://www.googleapis.com/youtube/v3',
-  params: {
-    part: 'snippet',
-    type: 'video',
-    maxResults: 5,
-    key: '' + KEY
-  }
-});
+// export const axios.create({
+//   baseURL: 'https://www.googleapis.com/youtube/v3',
+//   params: {
+//     part: 'snippet',
+//     type: 'video',
+//     maxResults: 5,
+//     key: `${KEY}`
+//   }
+// });
+
+var fetchVids = exports.fetchVids = function fetchVids() {
+  debugger;
+  return $.ajax({
+    url: '/api/gallery/index',
+    method: 'GET'
+  });
+};
 
 /***/ }),
 

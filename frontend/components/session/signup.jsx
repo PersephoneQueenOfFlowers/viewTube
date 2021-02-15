@@ -10,7 +10,7 @@ class Signup extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    $(".nav .right, .nav .center").css("visibility", "hidden");
+    $(".nav .right .signup, .nav .center").css("visibility", "hidden");
   }
 
   handleInput(type) {
@@ -36,6 +36,10 @@ class Signup extends React.Component {
         </span>
       )
     }
+  }
+
+  componentWillUnmount() {
+    this.props.removeErrors();
   }
 
   render() {

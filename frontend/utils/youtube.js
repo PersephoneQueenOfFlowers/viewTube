@@ -2,12 +2,20 @@ import axios from 'axios';
 
 const KEY = 'AIzaSyCwK9g3u1pDVwsaipVwWQXST_4YY24Q2HY';
 
-export default axios.create({
-  baseURL: 'https://www.googleapis.com/youtube/v3',
-  params: {
-    part: 'snippet',
-    type: 'video',
-    maxResults: 5,
-    key: `${KEY}`
-  }
-});
+// export const axios.create({
+//   baseURL: 'https://www.googleapis.com/youtube/v3',
+//   params: {
+//     part: 'snippet',
+//     type: 'video',
+//     maxResults: 5,
+//     key: `${KEY}`
+//   }
+// });
+
+export const fetchVids = () => {
+  debugger
+  return $.ajax({
+    url: '/api/gallery/index',
+    method: 'GET'
+  })
+}

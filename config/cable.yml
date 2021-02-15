@@ -1,3 +1,13 @@
+
+aws:
+  access_key_id: "AKIA44QL2Z7ALZA5C5RR"
+  secret_access_key: "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"
+  region: "us-west-1"
+  dev:
+    bucket: "viootube-dev"
+  prod:
+    bucket: "viootube-pro"
+
 development:
   adapter: async
 

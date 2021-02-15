@@ -1,11 +1,16 @@
 
 class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true
   # If a password was set, we validate it meets the requirements.
   # Note the `allow_nil`.
   validates :password, length: { minimum: 6, allow_nil: true }
   validates :password_digest, presence: true
   validates :session_token, presence: true, uniqueness: true
+
+  has_one :gallery,
+    foreign_key: :owner_id,
+    class_name: :Gallery
 
   attr_reader :password
 

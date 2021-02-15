@@ -1,14 +1,15 @@
 import React from 'react';
 import VideoList from '../video/video_list';
-import youtube from '../../utils/youtube';
+import { fetchVids } from '../../utils/youtube';
 import Sidebar from '../sidebar/sidebar';
 import Hero from '../hero';
 // import { useAsync } from "react-async";
 class Home extends React.Component{
   constructor(props){
     super(props)
-    $(".nav .right, .nav .center").css("visibility", "visible");
+    $(".nav .right *, .nav .center").css("visibility", "visible");
     this.state = {
+      currentUser: this.props.currentUser ? true : false,
       videos: [
         {
           id: "PuTqWxuAazI",
@@ -123,13 +124,12 @@ class Home extends React.Component{
           }
         }
       ], selectedVideo: null};
-    // this.onSubmit = this.onSubmit.bind(this);
   }
 
   render(){
     return (
     <div className="home"> 
-      <Sidebar />
+      <Sidebar currentUser={this.props.currentUser}/>
       <div className="four column">
         <Hero />
         <VideoList videos={this.state.videos} />

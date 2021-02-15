@@ -36,16 +36,14 @@ export default ({ currentUser, logout, login }) => {
       <div className={'center'}> <SearchBar /> </div> 
       <div className={'right'}> 
         <button className={'login demo'} onClick={ e => handleClick(e)}>demo login</button>
-        <Link to="/signup">Sign Up</Link>
-        <Link className={'login'} to="/login">login</Link>
+        <Link className={'signup'} to="/signup">Sign Up</Link>
+        <Link className={'login'} to="/login">Login</Link>
       </div>
     </div>
   );
   return (
     <header className="nav-bar">
-
         {display}
-   
     </header>
   )
 }

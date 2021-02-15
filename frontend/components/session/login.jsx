@@ -8,7 +8,7 @@ class Login extends React.Component {
       password: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    $(".nav .right, .nav .center, .sideNav .signIn").css("visibility", "hidden");
+    $(".nav .right .login, .nav .center, .sideNav .signIn").css("visibility", "hidden");
   }
 
   handleInput(type) {
@@ -20,10 +20,10 @@ class Login extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.login(this.state)
-      .then(this.props.history.push())
-      .fail(
-        // $(".nav .right").css("visibility", "hidden")  
-      )
+      .then(
+        this.props.history.push(),
+        $(".home .navbar .sideNavItem.signIn").css("visibility", "hidden")
+      );
   }
 
   renderErrors() {
@@ -34,6 +34,11 @@ class Login extends React.Component {
         </span>
       )
     }
+  }
+
+
+  componentWillUnmount(){
+    this.props.removeErrors();
   }
 
   render() {

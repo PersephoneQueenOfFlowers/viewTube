@@ -1,0 +1,7 @@
+
+<% @gallery.videos.each do |video| %>     
+  <h1><%=video %></h1>
+  <%= video_tag(url_for(video), style: "width:250px;height:auto", :controls => true) if @gallery.videos.attached? %>
+<% end %>
+
+
