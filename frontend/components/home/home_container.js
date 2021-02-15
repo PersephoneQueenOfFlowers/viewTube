@@ -14,4 +14,4 @@ const mapDispatchToProps = dispatch => ({
   removeErrors: () => dispatch(removeErrors())
 });
 
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

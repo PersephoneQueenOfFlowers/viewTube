@@ -9,7 +9,6 @@ class Home extends React.Component{
     super(props)
     $(".nav .right *, .nav .center").css("visibility", "visible");
     this.state = {
-      currentUser: this.props.currentUser ? true : false,
       videos: [
         {
           id: "PuTqWxuAazI",

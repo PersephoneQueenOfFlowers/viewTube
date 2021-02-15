@@ -334,7 +334,6 @@ var Home = function (_React$Component) {
 
     $(".nav .right *, .nav .center").css("visibility", "visible");
     _this.state = {
-      currentUser: _this.props.currentUser ? true : false,
       videos: [{
         id: "PuTqWxuAazI",
         snippet: {
@@ -506,7 +505,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_home2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_home2.default);
 
 /***/ }),
 
