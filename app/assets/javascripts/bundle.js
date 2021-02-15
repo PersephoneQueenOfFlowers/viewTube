@@ -198,10 +198,6 @@ var _home_container = __webpack_require__(/*! ./home/home_container */ "./fronte
 
 var _home_container2 = _interopRequireDefault(_home_container);
 
-var _home = __webpack_require__(/*! ./home/home */ "./frontend/components/home/home.jsx");
-
-var _home2 = _interopRequireDefault(_home);
-
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 var _route_util = __webpack_require__(/*! ../utils/route_util */ "./frontend/utils/route_util.jsx");
@@ -227,7 +223,6 @@ exports.default = function () {
     )
   );
 };
-// import WelcomeBar from './nav_bar/welcome_bar_container';
 
 /***/ }),
 
@@ -500,10 +495,16 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-// const mapDispatchToProps = dispatch => ({
-//   login: formUser => dispatch(login(formUser)),
-//   removeErrors: () => dispatch(removeErrors())
-// });
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    login: function login(formUser) {
+      return dispatch((0, _session.login)(formUser));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0, _session.removeErrors)());
+    }
+  };
+};
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, null)(_home2.default);
 
@@ -1313,7 +1314,7 @@ var Sidebar = function (_React$Component) {
 
       var displayLogin = this.props.currentUser ? null : _react2.default.createElement(
         'li',
-        { className: 'sideNavItem signIn ' + this.state.signedIn },
+        { className: 'sideNavItem signIn' },
         _react2.default.createElement(
           'h2',
           null,

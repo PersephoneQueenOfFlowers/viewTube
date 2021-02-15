@@ -11,7 +11,7 @@ class Sidebar extends React.Component {
   render() {
 
     let displayLogin = this.props.currentUser ? null :(
-      <li className={`sideNavItem signIn ${this.state.signedIn}`}>
+      <li className={'sideNavItem signIn'}>
         <h2>Log in to like videos <br />and comment</h2>
         <Link className={'login'} to={{
           pathname: "/login",

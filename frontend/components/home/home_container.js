@@ -9,9 +9,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-// const mapDispatchToProps = dispatch => ({
-//   login: formUser => dispatch(login(formUser)),
-//   removeErrors: () => dispatch(removeErrors())
-// });
+const mapDispatchToProps = dispatch => ({
+  login: formUser => dispatch(login(formUser)),
+  removeErrors: () => dispatch(removeErrors())
+});
 
 export default connect(mapStateToProps, null)(Home);
