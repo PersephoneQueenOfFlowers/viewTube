@@ -9,6 +9,7 @@ class Login extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     $(".nav .right .login, .nav .center, .sideNav .signIn").css("visibility", "hidden");
+    $(".nav .right .signup").css("visibility","visible");
   }
 
   handleInput(type) {

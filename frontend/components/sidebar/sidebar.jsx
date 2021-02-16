@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
           aboutProps: {
             demo: false
           }
-        }}>login</Link>
+        }}>Login</Link>
       </li>)
 
     return (

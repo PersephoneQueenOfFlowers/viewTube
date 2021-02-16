@@ -881,6 +881,7 @@ var Login = function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     $(".nav .right .login, .nav .center, .sideNav .signIn").css("visibility", "hidden");
+    $(".nav .right .signup").css("visibility", "visible");
     return _this;
   }
 
@@ -1091,6 +1092,7 @@ var Signup = function (_React$Component) {
 
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     $(".nav .right .signup, .nav .center").css("visibility", "hidden");
+    $(".nav .right .login").css("visibility", "visible");
     return _this;
   }
 
@@ -1332,7 +1334,7 @@ var Sidebar = function (_React$Component) {
                 demo: false
               }
             } },
-          'login'
+          'Login'
         )
       );
 
