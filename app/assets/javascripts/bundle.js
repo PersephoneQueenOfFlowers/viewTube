@@ -934,7 +934,7 @@ var Login = function (_React$Component) {
             _react2.default.createElement(
               'h2',
               null,
-              'log in'
+              'Log In'
             ),
             _react2.default.createElement(
               'span',

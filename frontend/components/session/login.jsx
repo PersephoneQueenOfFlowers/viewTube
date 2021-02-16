@@ -47,7 +47,7 @@ class Login extends React.Component {
       <section className="form-outer-container">
         <div className="form-inner-container">
           <div className="session-form login">
-            <h2>log in</h2>
+            <h2>Log In</h2>
             <span className="errors">{this.renderErrors()}</span>
             
             <form className="login">
