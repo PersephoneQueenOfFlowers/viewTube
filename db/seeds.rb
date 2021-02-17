@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require "open-uri"
 
 User.destroy_all
 Gallery.destroy_all
@@ -21,10 +22,10 @@ v2 = Video.create({title:"sumo wrestling David vs Goliath", description:"smaller
 v3 = Video.create({title:"trail walkers", description:"a bit of hiking for some cardio and nature"})
 v4 = Video.create({title:"fuel trucks parking", description:"fuel trucks parking, because they have to park"})
 
-v1.video.attach(io: File.open("/Users/sethschoenfeld/Desktop/uploads/movie-mile-22.mov"), filename: "movie-mile-22.mov")
-v2.video.attach(io: File.open("/Users/sethschoenfeld/Desktop/uploads/sumo.mp4"), filename: "sumo.mp4")
-v3.video.attach(io: File.open("/Users/sethschoenfeld/Desktop/uploads/trail_walkers.mp4"), filename: "trail_walkers.mp4")
-v4.video.attach(io: File.open("/Users/sethschoenfeld/Desktop/uploads/fuel_truck.mp4"), filename: "fuel_truck.mp4")
+v1.video.attach(io: open("https://viootube-dev.s3-us-west-1.amazonaws.com/GZ1TLtH61dmowAMefT67g3EY"), filename: "movie-mile-22.mov")
+v2.video.attach(io: open("https://viootube-dev.s3-us-west-1.amazonaws.com/y3DaHzreQd5XLqbfrjZxLgk7"), filename: "sumo.mp4")
+v3.video.attach(io: open("https://viootube-dev.s3-us-west-1.amazonaws.com/mNWv6EEeBbmZHbGTwoSfKEfA"), filename: "trail_walkers.mp4")
+v4.video.attach(io: open("https://viootube-dev.s3-us-west-1.amazonaws.com/hpthw2C2tRvjTL82Yby9b9oS"), filename: "fuel_truck.mp4")
 
 
 
