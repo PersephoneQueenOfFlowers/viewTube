@@ -16,10 +16,10 @@ user2 = User.create({ username: 'john', email: 'john@john.com', password: '12345
 user3 = User.create({ username: 'rhonda', email: 'rhonda@rhonda.com', password: '123456' })
 user4 = User.create({ username: 'will', email: 'will@will.com', password: '123456' })
 
-v1 = Video.create({})
-v2 = Video.create({})
-v3 = Video.create({})
-v4 = Video.create({})
+v1 = Video.create({title:"Mile 22",description:"American action thriller film directed by Peter Berg and written by Lea Carpenter, from a story by Carpenter and Graham Roland. The film stars Mark Wahlberg, Iko Uwais, John Malkovich, Lauren Cohan, and Ronda Rousey."})
+v2 = Video.create({title:"sumo wrestling David vs Goliath", description:"smaller sumo wrestler defeats larger one in an upset"})
+v3 = Video.create({title:"trail walkers", description:"a bit of hiking for some cardio and nature"})
+v4 = Video.create({title:"fuel trucks parking", description:"fuel trucks parking, because they have to park"})
 
 v1.video.attach(io: File.open("/Users/sethschoenfeld/Desktop/uploads/movie-mile-22.mov"), filename: "movie-mile-22.mov")
 v2.video.attach(io: File.open("/Users/sethschoenfeld/Desktop/uploads/sumo.mp4"), filename: "sumo.mp4")

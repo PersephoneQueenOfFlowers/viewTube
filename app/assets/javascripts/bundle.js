@@ -1522,9 +1522,7 @@ var VideoDetail = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (VideoDetail.__proto__ || Object.getPrototypeOf(VideoDetail)).call(this, props));
 
-    _this.state = { url: _this.props.video.url,
-      selectedVideo: null };
-    debugger;
+    _this.state = { url: _this.props.video };
     return _this;
   }
 
@@ -1532,7 +1530,6 @@ var VideoDetail = function (_React$Component) {
     key: "handleClick",
     value: function handleClick(e) {
       e.preventDefault();
-      debugger;
     }
   }, {
     key: "render",
@@ -1545,22 +1542,14 @@ var VideoDetail = function (_React$Component) {
         );
       }
 
-      var videoSrc = "" + url.video;
-
-      debugger;
+      var videoSrc = "" + this.state.url;
       return _react2.default.createElement(
         "div",
         null,
         _react2.default.createElement(
           "div",
           { className: "ui embed" },
-          _react2.default.createElement(
-            "a",
-            { onClick: function onClick(e) {
-                return handleClick(e);
-              } },
-            _react2.default.createElement("video", { title: "video player", src: videoSrc })
-          )
+          _react2.default.createElement("video", { title: "video player", src: videoSrc })
         ),
         _react2.default.createElement(
           "div",
@@ -1662,6 +1651,7 @@ var VideoList = function VideoList(videos) {
     return null;
   }
   var renderedList = videos.videos.map(function (video) {
+    debugger;
     return _react2.default.createElement(
       'div',
       { className: "videoItemContainer" },

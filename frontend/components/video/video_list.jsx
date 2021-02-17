@@ -7,6 +7,7 @@ const VideoList = ( videos) => {
     return null
   }
   const renderedList = videos.videos.map(video => {
+    debugger 
     return (
       <div className={"videoItemContainer"}>
         <VideoDetail video={video.videoUrl} />
