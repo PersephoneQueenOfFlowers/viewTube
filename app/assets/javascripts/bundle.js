@@ -198,6 +198,10 @@ var _home_container = __webpack_require__(/*! ./home/home_container */ "./fronte
 
 var _home_container2 = _interopRequireDefault(_home_container);
 
+var _show_container = __webpack_require__(/*! ./show/show_container */ "./frontend/components/show/show_container.js");
+
+var _show_container2 = _interopRequireDefault(_show_container);
+
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
 var _route_util = __webpack_require__(/*! ../utils/route_util */ "./frontend/utils/route_util.jsx");
@@ -218,6 +222,7 @@ exports.default = function () {
       null,
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _signup_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _login_container2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/show', component: _show_container2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _home_container2.default }),
       _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' })
     )
@@ -333,110 +338,33 @@ var Home = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
     $(".nav .right *, .nav .center").css("visibility", "visible");
-    _this.state = {
-      videos: [{
-        id: "PuTqWxuAazI",
-        snippet: {
-          title: "EVOLUTION of WORLD&#39; S TALLEST BUILDING: Size Comparison(1901- 2022)",
-          url: "https://i.ytimg.com/vi/PuTqWxuAazI/mqdefault.jpg"
-        }
-      }, {
-        id: "pWxnVOB0Y98",
-        snippet: {
-          title: "Building The Most Creative Modern Water slide To Underground Swimming Pool",
-          url: "https://i.ytimg.com/vi/pWxnVOB0Y98/mqdefault.jpg"
-        }
-      }, {
-        id: "djRbwtkRS4M",
-        snippet: {
-          title: "10 MOST IMPRESSIVE Buildings In The World",
-          url: "https://i.ytimg.com/vi/djRbwtkRS4M/mqdefault.jpg"
-        }
-      }, {
-        id: "mmAbFyxZfAc",
-        snippet: {
-          title: "Demolition and Building FAILS #1 JUNE 2019",
-          url: "https://i.ytimg.com/vi/mmAbFyxZfAc/mqdefault.jpg"
-        }
-      }, {
-        id: "e9bQ70RHKj8",
-        snippet: {
-          title: "Building A Modern Mud House Construction Tile Roof By Traditional Tools",
-          url: "https://i.ytimg.com/vi/e9bQ70RHKj8/mqdefault.jpg"
-        }
-      }, {
-        id: "djRbwtkRS4M",
-        snippet: {
-          title: "10 MOST IMPRESSIVE Buildings In The World",
-          url: "https://i.ytimg.com/vi/djRbwtkRS4M/mqdefault.jpg"
-        }
-      }, {
-        id: "mmAbFyxZfAc",
-        snippet: {
-          title: "Demolition and Building FAILS #1 JUNE 2019",
-          url: "https://i.ytimg.com/vi/mmAbFyxZfAc/mqdefault.jpg"
-        }
-      }, {
-        id: "e9bQ70RHKj8",
-        snippet: {
-          title: "Building A Modern Mud House Construction Tile Roof By Traditional Tools",
-          url: "https://i.ytimg.com/vi/e9bQ70RHKj8/mqdefault.jpg"
-        }
-      }, {
-        id: "PuTqWxuAazI",
-        snippet: {
-          title: "EVOLUTION of WORLD&#39; S TALLEST BUILDING: Size Comparison(1901- 2022)",
-          url: "https://i.ytimg.com/vi/PuTqWxuAazI/mqdefault.jpg"
-        }
-      }, {
-        id: "pWxnVOB0Y98",
-        snippet: {
-          title: "Building The Most Creative Modern Water slide To Underground Swimming Pool",
-          url: "https://i.ytimg.com/vi/pWxnVOB0Y98/mqdefault.jpg"
-        }
-      }, {
-        id: "djRbwtkRS4M",
-        snippet: {
-          title: "10 MOST IMPRESSIVE Buildings In The World",
-          url: "https://i.ytimg.com/vi/djRbwtkRS4M/mqdefault.jpg"
-        }
-      }, {
-        id: "mmAbFyxZfAc",
-        snippet: {
-          title: "Demolition and Building FAILS #1 JUNE 2019",
-          url: "https://i.ytimg.com/vi/mmAbFyxZfAc/mqdefault.jpg"
-        }
-      }, {
-        id: "e9bQ70RHKj8",
-        snippet: {
-          title: "Building A Modern Mud House Construction Tile Roof By Traditional Tools",
-          url: "https://i.ytimg.com/vi/e9bQ70RHKj8/mqdefault.jpg"
-        }
-      }, {
-        id: "djRbwtkRS4M",
-        snippet: {
-          title: "10 MOST IMPRESSIVE Buildings In The World",
-          url: "https://i.ytimg.com/vi/djRbwtkRS4M/mqdefault.jpg"
-        }
-      }, {
-        id: "mmAbFyxZfAc",
-        snippet: {
-          title: "Demolition and Building FAILS #1 JUNE 2019",
-          url: "https://i.ytimg.com/vi/mmAbFyxZfAc/mqdefault.jpg"
-        }
-      }, {
-        id: "e9bQ70RHKj8",
-        snippet: {
-          title: "Building A Modern Mud House Construction Tile Roof By Traditional Tools",
-          url: "https://i.ytimg.com/vi/e9bQ70RHKj8/mqdefault.jpg"
-        }
-      }], selectedVideo: null };
+    _this.state = { videos: [] };
     return _this;
   }
 
   _createClass(Home, [{
+    key: 'fetchVids',
+    value: function fetchVids() {
+      var _this2 = this;
+
+      $.ajax({
+        url: '/api/videos/',
+        method: 'GET'
+      }).then(function (videos) {
+        _this2.setState({ videos: videos });
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.fetchVids();
+    }
+  }, {
     key: 'render',
     value: function render() {
+      if (this.state.videos.length === 0) {
+        return null;
+      }
       return _react2.default.createElement(
         'div',
         { className: 'home' },
@@ -1269,6 +1197,157 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 
+/***/ "./frontend/components/show/show.jsx":
+/*!*******************************************!*\
+  !*** ./frontend/components/show/show.jsx ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _video_list = __webpack_require__(/*! ../video/video_list */ "./frontend/components/video/video_list.jsx");
+
+var _video_list2 = _interopRequireDefault(_video_list);
+
+var _youtube = __webpack_require__(/*! ../../utils/youtube */ "./frontend/utils/youtube.js");
+
+var _sidebar = __webpack_require__(/*! ../sidebar/sidebar */ "./frontend/components/sidebar/sidebar.jsx");
+
+var _sidebar2 = _interopRequireDefault(_sidebar);
+
+var _hero = __webpack_require__(/*! ../hero */ "./frontend/components/hero.jsx");
+
+var _hero2 = _interopRequireDefault(_hero);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import { useAsync } from "react-async";
+var Show = function (_React$Component) {
+  _inherits(Show, _React$Component);
+
+  function Show(props) {
+    _classCallCheck(this, Show);
+
+    var _this = _possibleConstructorReturn(this, (Show.__proto__ || Object.getPrototypeOf(Show)).call(this, props));
+
+    $(".nav .right *, .nav .center").css("visibility", "visible");
+    _this.state = { videos: [], selectedVideo: null };
+    return _this;
+  }
+
+  _createClass(Show, [{
+    key: 'fetchVids',
+    value: function fetchVids() {
+      var _this2 = this;
+
+      $.ajax({
+        url: '/api/videos/',
+        method: 'GET'
+      }).then(function (videos) {
+        _this2.setState({ videos: videos });
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.fetchVids();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.state.videos.length === 0) {
+        return null;
+      }
+      return _react2.default.createElement(
+        'div',
+        { className: 'show' },
+        _react2.default.createElement(_sidebar2.default, { currentUser: this.props.currentUser }),
+        _react2.default.createElement(
+          'div',
+          { className: 'four column' },
+          _react2.default.createElement(_hero2.default, null),
+          _react2.default.createElement(_video_list2.default, { videos: this.state.videos })
+        )
+      );
+    }
+  }]);
+
+  return Show;
+}(_react2.default.Component);
+
+exports.default = Show;
+
+// onVideoSelect = { this.onVideoSelect }
+
+/***/ }),
+
+/***/ "./frontend/components/show/show_container.js":
+/*!****************************************************!*\
+  !*** ./frontend/components/show/show_container.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _session = __webpack_require__(/*! ../../actions/session */ "./frontend/actions/session.js");
+
+var _show = __webpack_require__(/*! ./show */ "./frontend/components/show/show.jsx");
+
+var _show2 = _interopRequireDefault(_show);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.session.currentUser
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    login: function login(formUser) {
+      return dispatch((0, _session.login)(formUser));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0, _session.removeErrors)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_show2.default);
+
+/***/ }),
+
 /***/ "./frontend/components/sidebar/sidebar.jsx":
 /*!*************************************************!*\
   !*** ./frontend/components/sidebar/sidebar.jsx ***!
@@ -1419,53 +1498,88 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var VideoDetail = function VideoDetail(_ref) {
-  var video = _ref.video;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  if (!video) {
-    return _react2.default.createElement(
-      "div",
-      null,
-      "Loading..."
-    );
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+// import { Link } from 'react-router-dom';
+
+var VideoDetail = function (_React$Component) {
+  _inherits(VideoDetail, _React$Component);
+
+  function VideoDetail(props) {
+    _classCallCheck(this, VideoDetail);
+
+    var _this = _possibleConstructorReturn(this, (VideoDetail.__proto__ || Object.getPrototypeOf(VideoDetail)).call(this, props));
+
+    _this.state = { url: _this.props.video.url,
+      selectedVideo: null };
+    debugger;
+    return _this;
   }
 
-  var videoSrc = "https://www.youtube.com/embed/" + video.id;
+  _createClass(VideoDetail, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      e.preventDefault();
+      debugger;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (!this.state.url) {
+        return _react2.default.createElement(
+          "div",
+          null,
+          "Loading..."
+        );
+      }
 
-  return _react2.default.createElement(
-    "div",
-    null,
-    _react2.default.createElement(
-      "div",
-      { className: "ui embed" },
-      _react2.default.createElement("iframe", { title: "video player", src: videoSrc })
-    ),
-    _react2.default.createElement(
-      "div",
-      { className: "ui segment" },
-      _react2.default.createElement(
+      var videoSrc = "" + url.video;
+
+      debugger;
+      return _react2.default.createElement(
         "div",
         null,
         _react2.default.createElement(
-          "h4",
-          { className: "ui header" },
-          video.snippet.title
+          "div",
+          { className: "ui embed" },
+          _react2.default.createElement(
+            "a",
+            { onClick: function onClick(e) {
+                return handleClick(e);
+              } },
+            _react2.default.createElement("video", { title: "video player", src: videoSrc })
+          )
         ),
         _react2.default.createElement(
-          "p",
-          null,
-          video.snippet.description
+          "div",
+          { className: "ui segment" },
+          _react2.default.createElement(
+            "div",
+            null,
+            _react2.default.createElement("h4", { className: "ui header" }),
+            _react2.default.createElement("p", null)
+          )
         )
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return VideoDetail;
+}(_react2.default.Component);
+
+;
 
 exports.default = VideoDetail;
 
@@ -1498,14 +1612,14 @@ var VideoItem = function VideoItem(_ref) {
   return _react2.default.createElement(
     "div",
     { className: "video-item item" },
-    _react2.default.createElement("img", { className: "ui image", alt: video.snippet.title, src: video.snippet.url }),
+    _react2.default.createElement("img", { className: "ui image", alt: video.snippet.id, src: video.snippet.url }),
     _react2.default.createElement(
       "div",
       { className: "content" },
       _react2.default.createElement(
         "div",
         { className: "header" },
-        video.snippet.title
+        video.snippet.url
       )
     )
   );
@@ -1543,16 +1657,15 @@ var _video_detail2 = _interopRequireDefault(_video_detail);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var VideoList = function VideoList(_ref) {
-  var videos = _ref.videos,
-      onVideoSelect = _ref.onVideoSelect;
-
-
-  var renderedList = videos.map(function (video) {
+var VideoList = function VideoList(videos) {
+  if (videos === {}) {
+    return null;
+  }
+  var renderedList = videos.videos.map(function (video) {
     return _react2.default.createElement(
       'div',
       { className: "videoItemContainer" },
-      _react2.default.createElement(_video_detail2.default, { key: video.id, video: video })
+      _react2.default.createElement(_video_detail2.default, { video: video.videoUrl })
     );
   });
 
@@ -1921,6 +2034,15 @@ var deleteSession = exports.deleteSession = function deleteSession() {
   });
 };
 
+var fetchVids = exports.fetchVids = function fetchVids() {
+  $.ajax({
+    url: '/api/galleries/',
+    method: 'GET'
+  }).then(function (videos) {
+    debugger;
+  });
+};
+
 /***/ }),
 
 /***/ "./frontend/utils/youtube.js":
@@ -1932,11 +2054,6 @@ var deleteSession = exports.deleteSession = function deleteSession() {
 
 "use strict";
 
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchVids = undefined;
 
 var _axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
@@ -1956,13 +2073,14 @@ var KEY = 'AIzaSyCwK9g3u1pDVwsaipVwWQXST_4YY24Q2HY';
 //   }
 // });
 
-var fetchVids = exports.fetchVids = function fetchVids() {
-  debugger;
-  return $.ajax({
-    url: '/api/gallery/index',
-    method: 'GET'
-  });
-};
+// fetchVids = (){
+//   $.ajax({
+//       url: '/api/gallery/index',
+//       method: 'GET'
+//     }).then(videos => {
+//       debugger 
+//     })
+// }
 
 /***/ }),
 

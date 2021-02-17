@@ -6,10 +6,9 @@ class GalleryController < ApplicationController
   end
 
   def index  
-    @gallery = Gallery.find(0)
+    @gallery = Gallery.find(2)
     render :index
   end
-  
 end
 =begin
   TODO pass in an ID param to load the correct user gallery

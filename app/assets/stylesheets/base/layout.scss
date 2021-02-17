@@ -18,7 +18,7 @@ body{
   margin: 20px auto;
 }
 
-.home .four.column{
+.home .four.column, .show .four.column{
   background-color: #181818;
 }
 
@@ -87,7 +87,7 @@ body{
           &:last-child div, &:last-child {
             button{
               max-width: 50%;
-              color: rgba(39, 147, 230, 0.6);
+              color: #3ea6ff;
               background-color: transparent;
               background-size: 15px 15px;
               padding: 7px 21px;

@@ -12,10 +12,11 @@ const KEY = 'AIzaSyCwK9g3u1pDVwsaipVwWQXST_4YY24Q2HY';
 //   }
 // });
 
-export const fetchVids = () => {
-  debugger
-  return $.ajax({
-    url: '/api/gallery/index',
-    method: 'GET'
-  })
-}
+// fetchVids = (){
+//   $.ajax({
+//       url: '/api/gallery/index',
+//       method: 'GET'
+//     }).then(videos => {
+//       debugger 
+//     })
+// }

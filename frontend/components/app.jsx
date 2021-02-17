@@ -3,6 +3,7 @@ import NavBarContainer from './nav_bar/nav_bar_container';
 import SignupContainer from './session/signup_container';
 import LoginContainer from './session/login_container';
 import HomeContainer from './home/home_container';
+import ShowContainer from './show/show_container';
 import {
   BrowserRouter as Router,
   Route,
@@ -18,7 +19,8 @@ export default () => (
     </header>
     <Switch>
       <AuthRoute path="/signup" component={SignupContainer} />
-      <AuthRoute path="/login" component={LoginContainer} /> 
+      <AuthRoute path="/login" component={LoginContainer} />
+      <Route exact path="/show" component={ShowContainer} /> 
       <Route exact path="/" component={HomeContainer} />
       <Redirect to="/" /> 
     </Switch>

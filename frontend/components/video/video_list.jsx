@@ -2,12 +2,14 @@ import React from 'react';
 import VideoItem from './video_item';
 import VideoDetail from './video_detail';
 
-const VideoList = ({ videos, onVideoSelect }) => {
-
-  const renderedList = videos.map((video) => {
+const VideoList = ( videos) => { 
+  if (videos === {}) {
+    return null
+  }
+  const renderedList = videos.videos.map(video => {
     return (
       <div className={"videoItemContainer"}>
-        <VideoDetail key={video.id} video={video} />
+        <VideoDetail video={video.videoUrl} />
         </div>
       )
   });

@@ -20,3 +20,12 @@ export const deleteSession = () => (
     method: 'DELETE'
   })
 )
+
+export const fetchVids = () => {
+  $.ajax({
+    url: '/api/galleries/',
+    method: 'GET'
+  }).then(videos => {
+    debugger
+  })
+}

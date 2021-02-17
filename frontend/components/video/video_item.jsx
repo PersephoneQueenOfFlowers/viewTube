@@ -3,9 +3,9 @@ import React from 'react';
 const VideoItem = ({ video, onVideoSelect }) => {
   return (
     <div className="video-item item">
-      <img className="ui image" alt={video.snippet.title} src={video.snippet.url} />
+      <img className="ui image" alt={video.snippet.id} src={video.snippet.url} />
       <div className="content">
-        <div className="header">{video.snippet.title}</div>
+        <div className="header">{video.snippet.url}</div>
       </div>
     </div>
   );

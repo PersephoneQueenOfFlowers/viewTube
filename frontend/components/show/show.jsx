@@ -4,42 +4,42 @@ import { fetchVids } from '../../utils/youtube';
 import Sidebar from '../sidebar/sidebar';
 import Hero from '../hero';
 // import { useAsync } from "react-async";
-class Home extends React.Component{
-  constructor(props){
+class Show extends React.Component {
+  constructor(props) {
     super(props)
     $(".nav .right *, .nav .center").css("visibility", "visible");
-    this.state = { videos: []};
+    this.state = { videos: [], selectedVideo: null };
   }
 
-  fetchVids(){
+  fetchVids() {
     $.ajax({
       url: '/api/videos/',
       method: 'GET'
     }).then(videos => {
-      this.setState({videos});
+      this.setState({ videos });
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fetchVids();
   }
 
-  render(){
-    if(this.state.videos.length === 0){
+  render() {
+    if (this.state.videos.length === 0) {
       return null
     }
     return (
-    <div className="home"> 
-      <Sidebar currentUser={this.props.currentUser}/>
-      <div className="four column">
-        <Hero />
-        <VideoList videos={this.state.videos} />
+      <div className="show">
+        <Sidebar currentUser={this.props.currentUser} />
+        <div className="four column">
+          <Hero />
+          <VideoList videos={this.state.videos} />
+        </div>
       </div>
-    </div>
     )
   }
 }
 
-export default Home;
+export default Show;
 
 // onVideoSelect = { this.onVideoSelect } 
