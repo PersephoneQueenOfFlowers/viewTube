@@ -24,7 +24,7 @@ class VideoDetail extends React.Component{
       <div id={this.props.video.id} className={selected}>
         <Link to={`/show/${this.props.video.id}`}>
           <div className="ui embed">
-            <video title="video player" src={videoSrc} />
+            <video controls title="video player" src={videoSrc} />
           </div>
           <div className="ui segment">
             <div>

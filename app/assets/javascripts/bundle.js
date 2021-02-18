@@ -1580,7 +1580,7 @@ var VideoDetail = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'ui embed' },
-            _react2.default.createElement('video', { title: 'video player', src: videoSrc })
+            _react2.default.createElement('video', { controls: true, title: 'video player', src: videoSrc })
           ),
           _react2.default.createElement(
             'div',
