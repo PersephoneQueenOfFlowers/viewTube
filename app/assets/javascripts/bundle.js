@@ -400,13 +400,11 @@ var Home = function (_React$Component) {
   _createClass(Home, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      debugger;
       this.props.callVideos();
     }
   }, {
     key: 'render',
     value: function render() {
-      debugger;
       if (Object.keys(this.props.videos).length === 0) {
         return null;
       }
@@ -460,7 +458,6 @@ var _home2 = _interopRequireDefault(_home);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
-  debugger;
   return {
     currentUser: state.session.currentUser,
     videos: state.entities.videos

@@ -4,7 +4,6 @@ import { callCurrentVideo, callVideos } from '../../actions/video_actions';
 import Home from './home';
 
 const mapStateToProps = (state) => {
-  debugger
   return {
     currentUser: state.session.currentUser,
     videos: state.entities.videos

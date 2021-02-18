@@ -12,12 +12,10 @@ class Home extends React.Component{
   }
 
   componentDidMount(){
-    debugger
     this.props.callVideos()
   }
 
   render(){
-    debugger
     if (Object.keys(this.props.videos).length === 0){
       return null
     }
