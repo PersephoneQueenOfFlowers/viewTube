@@ -22,6 +22,20 @@ body{
   background-color: #181818;
 }
 
+.show {
+  display: flex;
+  margin-top: 65px;
+  justify-content: center;
+  margin-top: 10%;
+  .videoItemContainer {
+    max-width: 800px;
+    border: 2px solid white;
+    video {
+      max-width: 100%;
+    }
+  }
+}
+
 .form-outer-container {
   height: 400px;
   width: 350px;

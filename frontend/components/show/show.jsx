@@ -1,39 +1,29 @@
 import React from 'react';
 import VideoList from '../video/video_list';
-import { fetchVids } from '../../utils/youtube';
 import Sidebar from '../sidebar/sidebar';
 import Hero from '../hero';
-// import { useAsync } from "react-async";
+import VideoDetail from '../video/video_detail';
 class Show extends React.Component {
   constructor(props) {
     super(props)
     $(".nav .right *, .nav .center").css("visibility", "visible");
-    this.state = { videos: [], selectedVideo: null };
-  }
-
-  fetchVids() {
-    $.ajax({
-      url: '/api/videos/',
-      method: 'GET'
-    }).then(videos => {
-      this.setState({ videos });
-    })
+    this.state = { 
+      video: {}
+    }
   }
 
   componentDidMount() {
-    this.fetchVids();
+    this.setState({ video : this.props.callCurrentVideo(this.props.match.params.id)})
   }
 
   render() {
-    if (this.state.videos.length === 0) {
-      return null
-    }
     return (
-      <div className="show">
+      <div>
         <Sidebar currentUser={this.props.currentUser} />
-        <div className="four column">
-          <Hero />
-          <VideoList videos={this.state.videos} />
+        <div className="show">
+          <div className={"videoItemContainer"}>
+            <VideoDetail video={this.props.currentVideo[this.props.match.params.id]} />
+          </div>
         </div>
       </div>
     )
@@ -41,5 +31,3 @@ class Show extends React.Component {
 }
 
 export default Show;
-
-// onVideoSelect = { this.onVideoSelect } 

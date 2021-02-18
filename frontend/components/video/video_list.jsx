@@ -3,14 +3,14 @@ import VideoItem from './video_item';
 import VideoDetail from './video_detail';
 
 const VideoList = ( videos) => { 
-  if (videos === {}) {
+  if (!videos.videos) {
     return null
   }
-  const renderedList = videos.videos.map(video => {
-    debugger 
+
+  const renderedList = Object.values(videos.videos).map(video => {
     return (
       <div className={"videoItemContainer"}>
-        <VideoDetail video={video.videoUrl} />
+        <VideoDetail video={video} />
         </div>
       )
   });

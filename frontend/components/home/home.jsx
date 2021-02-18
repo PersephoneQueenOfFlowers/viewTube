@@ -1,31 +1,24 @@
 import React from 'react';
 import VideoList from '../video/video_list';
-import { fetchVids } from '../../utils/youtube';
+// import { fetchVids } from '../../actions/video_actions';
 import Sidebar from '../sidebar/sidebar';
 import Hero from '../hero';
-// import { useAsync } from "react-async";
 class Home extends React.Component{
   constructor(props){
     super(props)
     $(".nav .right *, .nav .center").css("visibility", "visible");
-    this.state = { videos: []};
-  }
+    this.state = {videos: []}
 
-  fetchVids(){
-    $.ajax({
-      url: '/api/videos/',
-      method: 'GET'
-    }).then(videos => {
-      this.setState({videos});
-    })
   }
 
   componentDidMount(){
-    this.fetchVids();
+    debugger
+    this.props.callVideos()
   }
 
   render(){
-    if(this.state.videos.length === 0){
+    debugger
+    if (Object.keys(this.props.videos).length === 0){
       return null
     }
     return (
@@ -33,7 +26,9 @@ class Home extends React.Component{
       <Sidebar currentUser={this.props.currentUser}/>
       <div className="four column">
         <Hero />
-        <VideoList videos={this.state.videos} />
+   
+          <VideoList videos={this.props.videos} />
+   
       </div>
     </div>
     )
@@ -41,5 +36,3 @@ class Home extends React.Component{
 }
 
 export default Home;
-
-// onVideoSelect = { this.onVideoSelect } 

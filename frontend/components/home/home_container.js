@@ -1,17 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { login, removeErrors } from '../../actions/session';
+import { callCurrentVideo, callVideos } from '../../actions/video_actions';
 import Home from './home';
 
 const mapStateToProps = (state) => {
+  debugger
   return {
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    videos: state.entities.videos
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  login: formUser => dispatch(login(formUser)),
-  removeErrors: () => dispatch(removeErrors())
+  callVideos: () => dispatch(callVideos()),
+  callCurrentVideo: (videoId) => dispatch(callCurrentVideo(videoId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

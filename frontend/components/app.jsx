@@ -20,7 +20,7 @@ export default () => (
     <Switch>
       <AuthRoute path="/signup" component={SignupContainer} />
       <AuthRoute path="/login" component={LoginContainer} />
-      <Route exact path="/show" component={ShowContainer} /> 
+      <Route path="/show/:id" component={ShowContainer} /> 
       <Route exact path="/" component={HomeContainer} />
       <Redirect to="/" /> 
     </Switch>
