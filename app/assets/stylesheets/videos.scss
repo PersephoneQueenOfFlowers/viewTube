@@ -16,6 +16,7 @@
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
+  height: 520px;
   .videoItemContainer {
     flex: 1 0 21%;
     margin: 5px;
@@ -23,8 +24,15 @@
     margin-left: calc(16px / 2);
     margin-right: calc(16px / 2);
     margin-bottom: 40px;
-    > div {
-      // max-width: 200px;
+    .segment {
+      display: flex;
+      justify-content: space-between;
+      width: 800px;
+      > div {
+        margin: 20px 0px;
+        color: #fff;
+        max-width:280px;
+      }
     }
     h4 {
       color: var(--yt-spec-text-primary);

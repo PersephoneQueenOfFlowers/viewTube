@@ -12,11 +12,25 @@ body{
     display: flex;
     justify-content: center;
   }
-};
+}
 
-.videoItemContainer .ui.segment > div {
-  margin: 20px auto;
-  border-bottom: 2px solid #666;
+.videoItemContainer {
+  max-width: 23%;
+  a {
+      text-decoration: none;
+  }
+  .ui.segment > div {
+    margin: 20px auto;
+    // border-bottom: 2px solid #666;
+    color: #fff;
+    .video-header{
+      font-size: 2rem;
+    }
+    .video-description{
+      font-size: 1.25rem;
+      margin: 5px 0;
+    }
+  }
 }
 
 .home .four.column, .show .four.column{
@@ -28,29 +42,91 @@ body{
   margin-top: 10%;
   flex-direction: column;
   align-items: center;
+  background-color: #181818;
   .videoItemContainer {
     max-width: 800px;
+    margin-top: 30px;
+    a {
+      text-decoration: none;
+    }
     video {
       max-width: 100%;
     }
     .ui.segment {
-      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      width: 800px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      > div {
+        margin: 20px 0px 0;
+        color: #fff;
+        max-width: 50%;
+      }
+      .shares-likes {
+        background-image: image-url('like-buttons.png');
+        background-size: 90.5%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position-y: 15px;
+        background-position-x: 45px;
+      }
       .video-header{
         font-size: 2rem;
       }
       .video-description{
         font-size: 1.25rem;
-        margin: 5px 0;
+        margin: 5px 0 20px;
       }
     }
   }
   .comments-outer-container {
     width: 800px;
-    margin: 0 auto;
+    margin: 20px auto;
     .comments-inner-container {
       line-height: 25px;
       margin: 20px 0;
       font-size: 1.75rem;
+    }
+    .createComment {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100px;
+      button {
+        color: #3ea6ff;
+        background-color: transparent;
+        background-size: 15px 15px;
+        padding: 14px 21px;
+        border-radius: 3px;
+        margin: 0 0.29em;
+        box-sizing: border-box;
+        border: 1px solid;
+        text-decoration: none;
+        font-size: 1.6rem;
+        font-weight: bold;
+      }
+      textarea {
+        margin: 0px;
+        width: 261px;
+        height: 30px;
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-flex-basis: 0.000000001px;
+        flex-basis: 0.000000001px;
+        margin-left: 1px;
+        padding: 2px 8px;
+        min-width: 645px;
+        line-height: 28px;
+        border: none;
+        background-color: #121212;
+        box-shadow: none;
+        text-align: inherit;
+        color: inherit;
+        font-family: 'Roboto','Noto',sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        outline: none;
+      }
     }
   }
 }

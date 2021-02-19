@@ -20,7 +20,6 @@ class Show extends React.Component {
   render() {
     return (
       <div>
-        <Sidebar currentUser={this.props.currentUser} />
         <div className="show">
           <div className={"videoItemContainer"}>
             <VideoDetail video={this.props.currentVideo[this.props.match.params.id]} />

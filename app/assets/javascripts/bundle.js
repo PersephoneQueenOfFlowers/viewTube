@@ -518,7 +518,6 @@ var Comments = function (_React$Component) {
       if (!this.props.comments.comments) {
         return null;
       }
-      console.log("rendered!");
       var videoId = JSON.parse(this.props.videoId);
       var displayCommentForm = this.props.currentUser ? _react2.default.createElement(_comments_form_container2.default, { userId: currentUser.id, videoId: videoId, createNewComment: this.props.createNewComment }) : _react2.default.createElement(
         'span',
@@ -1704,7 +1703,6 @@ var Show = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_sidebar2.default, { currentUser: this.props.currentUser }),
         _react2.default.createElement(
           'div',
           { className: 'show' },
@@ -1994,7 +1992,8 @@ var VideoDetail = function (_React$Component) {
                 { className: 'video-description' },
                 this.props.video.description
               )
-            )
+            ),
+            _react2.default.createElement('div', { className: 'shares-likes' })
           )
         )
       );

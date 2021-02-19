@@ -18,7 +18,6 @@ class Comments extends React.Component {
     if (!this.props.comments.comments) {
       return null
     }
-    console.log("rendered!");
     const videoId = JSON.parse(this.props.videoId);
     const displayCommentForm = this.props.currentUser ? (
       <CommentsFormContainer userId={currentUser.id} videoId={videoId} createNewComment={this.props.createNewComment}/>
