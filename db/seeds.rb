@@ -10,6 +10,7 @@ require "open-uri"
 User.destroy_all
 Gallery.destroy_all
 Video.destroy_all
+Comment.destroy_all
 
 
 user1 = User.create({ username: 'dave', email: 'dave@dave.com', password: '123456' })
@@ -27,7 +28,10 @@ v2.video.attach(io: open("https://viootube-dev.s3-us-west-1.amazonaws.com/y3DaHz
 v3.video.attach(io: open("https://viootube-dev.s3-us-west-1.amazonaws.com/mNWv6EEeBbmZHbGTwoSfKEfA"), filename: "trail_walkers.mp4")
 v4.video.attach(io: open("https://viootube-dev.s3-us-west-1.amazonaws.com/hpthw2C2tRvjTL82Yby9b9oS"), filename: "fuel_truck.mp4")
 
-
+comment1 = Comment.create({author_id: user1.id, video_id: v4.id, body: "Wow, it's really exciting watching sumo wrestling."})
+comment1 = Comment.create({author_id: user2.id, video_id: v4.id, body: "I wonder if it's easy to go see live."})
+comment1 = Comment.create({author_id: user3.id, video_id: v4.id, body: "I can't imagine how much these people must train all their lives long. I guess part of their practice is that they smack a wooden pole repeatedly, all. day. long."})
+comment1 = Comment.create({author_id: user4.id, video_id: v4.id, body: "Hmmmm. that doesn't sound very pleasant"})
 
 
 

@@ -28,8 +28,8 @@ class VideoDetail extends React.Component{
           </div>
           <div className="ui segment">
             <div>
-              <h4 className="ui header">{this.props.video.title}</h4>
-              <p>{this.props.video.description}</p>
+              <h1 className="video-header">{this.props.video.title}</h1>
+              <p className="video-description">{this.props.video.description}</p>
             </div>
           </div>
         </Link>

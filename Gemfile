@@ -39,11 +39,14 @@ gem 'font-awesome-sass', '~> 4.4.0'
 gem 'listen', '>= 3.0.5', '< 3.2'
 # Reduces boot times through caching; required in config/boot.rb
 
-gem 'byebug'
 # amazon aws s3 GEM for content uploads
 gem "aws-sdk-s3"
 
 # byebug for debugging video content
+gem 'byebug'
+
+# table print for making db tables look nice in term
+gem 'table_print'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -59,7 +62,6 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
-  gem 'table_print'
   gem 'securerandom'
 end
 

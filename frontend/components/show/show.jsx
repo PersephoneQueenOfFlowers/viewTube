@@ -3,6 +3,7 @@ import VideoList from '../video/video_list';
 import Sidebar from '../sidebar/sidebar';
 import Hero from '../hero';
 import VideoDetail from '../video/video_detail';
+import CommentsContainer from '../comments/comments_container';
 class Show extends React.Component {
   constructor(props) {
     super(props)
@@ -24,6 +25,7 @@ class Show extends React.Component {
           <div className={"videoItemContainer"}>
             <VideoDetail video={this.props.currentVideo[this.props.match.params.id]} />
           </div>
+          <CommentsContainer videoId={this.props.match.params.id} />
         </div>
       </div>
     )

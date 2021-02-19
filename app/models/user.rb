@@ -8,11 +8,10 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
   validates :session_token, presence: true, uniqueness: true
 
-  has_one :gallery,
-    foreign_key: :owner_id,
-    class_name: :Gallery
-
-  attr_reader :password
+  has_many :comments,
+    foreign_key: :author_id
+  
+    attr_reader :password
 
   after_initialize :ensure_session_token
 

@@ -24,7 +24,7 @@
     margin-right: calc(16px / 2);
     margin-bottom: 40px;
     > div {
-      max-width: 200px;
+      // max-width: 200px;
     }
     h4 {
       color: var(--yt-spec-text-primary);
@@ -45,7 +45,7 @@
       max-height: 4.4rem;
     }
     video {
-      max-width: 200px;
+      max-width: 100%;
     }
   }
 }

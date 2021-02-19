@@ -16,6 +16,7 @@ body{
 
 .videoItemContainer .ui.segment > div {
   margin: 20px auto;
+  border-bottom: 2px solid #666;
 }
 
 .home .four.column, .show .four.column{
@@ -24,14 +25,32 @@ body{
 
 .show {
   display: flex;
-  margin-top: 65px;
-  justify-content: center;
   margin-top: 10%;
+  flex-direction: column;
+  align-items: center;
   .videoItemContainer {
     max-width: 800px;
-    border: 2px solid white;
     video {
       max-width: 100%;
+    }
+    .ui.segment {
+      color: #fff;
+      .video-header{
+        font-size: 2rem;
+      }
+      .video-description{
+        font-size: 1.25rem;
+        margin: 5px 0;
+      }
+    }
+  }
+  .comments-outer-container {
+    width: 800px;
+    margin: 0 auto;
+    .comments-inner-container {
+      line-height: 25px;
+      margin: 20px 0;
+      font-size: 1.75rem;
     }
   }
 }

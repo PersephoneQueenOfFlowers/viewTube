@@ -86,6 +86,76 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./frontend/actions/comment_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/comment_actions.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeCurrentComment = exports.callComments = exports.createNewComment = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENTS = exports.RECEIVE_CURRENT_COMMENT = undefined;
+
+var _comments = __webpack_require__(/*! ../utils/comments */ "./frontend/utils/comments.js");
+
+var RECEIVE_CURRENT_COMMENT = exports.RECEIVE_CURRENT_COMMENT = 'RECEIVE_CURRENT_COMMENT';
+var RECEIVE_COMMENTS = exports.RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
+var REMOVE_COMMENT = exports.REMOVE_COMMENT = "REMOVE_COMMENT";
+
+var receiveCurrentComment = function receiveCurrentComment(comment) {
+  return {
+    type: RECEIVE_CURRENT_COMMENT,
+    comment: comment
+  };
+};
+
+var receiveComments = function receiveComments(comments) {
+  return {
+    type: RECEIVE_COMMENTS,
+    comments: comments
+  };
+};
+
+var removeComment = function removeComment(commentId) {
+  return {
+    type: REMOVE_COMMENT
+  };
+};
+
+var createNewComment = exports.createNewComment = function createNewComment(comment) {
+  return function (dispatch) {
+    return (0, _comments.postComment)(comment).then(function (comment) {
+      return dispatch(receiveCurrentComment(comment));
+    });
+  };
+};
+// .fail(error => (dispatch(receiveErrors(error.responseJSON))));
+
+
+var callComments = exports.callComments = function callComments() {
+  return function (dispatch) {
+    return (0, _comments.fetchComments)().then(function (comments) {
+      return dispatch(receiveComments(comments));
+    });
+  };
+};
+// .fail(error => (dispatch(receiveErrors(error.responseJSON))));
+
+var removeCurrentComment = exports.removeCurrentComment = function removeCurrentComment(commentId) {
+  return function (dispatch) {
+    return (0, _comments.deleteComment)(commentId).then(function () {
+      return dispatch(removeComment(commentId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session.js":
 /*!*************************************!*\
   !*** ./frontend/actions/session.js ***!
@@ -283,6 +353,327 @@ exports.default = function () {
     )
   );
 };
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comment_form.jsx":
+/*!*******************************************************!*\
+  !*** ./frontend/components/comments/comment_form.jsx ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CommentForm = function (_React$Component) {
+  _inherits(CommentForm, _React$Component);
+
+  function CommentForm(props) {
+    _classCallCheck(this, CommentForm);
+
+    var _this = _possibleConstructorReturn(this, (CommentForm.__proto__ || Object.getPrototypeOf(CommentForm)).call(this, props));
+
+    _this.state = {
+      body: "",
+      author_id: _this.props.userId,
+      video_id: _this.props.videoId
+
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(CommentForm, [{
+    key: "handleInput",
+    value: function handleInput() {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState({ body: e.target.value });
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.createNewComment(this.state);
+      this.setState({ commentBody: " " });
+      window.location.reload();
+    }
+
+    // componentDidUnmount(){
+    //   window.location.reload(false);
+    // }
+
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "form",
+        { className: "createComment" },
+        _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement("label", null),
+          _react2.default.createElement("textarea", {
+            name: "body",
+            value: this.state.commentBody,
+            onChange: this.handleInput()
+          })
+        ),
+        _react2.default.createElement(
+          "div",
+          null,
+          _react2.default.createElement(
+            "button",
+            { type: "submit", onClick: this.handleSubmit },
+            "Comment"
+          )
+        )
+      );
+    }
+  }]);
+
+  return CommentForm;
+}(_react2.default.Component);
+
+exports.default = CommentForm;
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comments.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/comments/comments.jsx ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _comments_form_container = __webpack_require__(/*! ./comments_form_container */ "./frontend/components/comments/comments_form_container.js");
+
+var _comments_form_container2 = _interopRequireDefault(_comments_form_container);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Comments = function (_React$Component) {
+  _inherits(Comments, _React$Component);
+
+  function Comments(props) {
+    _classCallCheck(this, Comments);
+
+    var _this = _possibleConstructorReturn(this, (Comments.__proto__ || Object.getPrototypeOf(Comments)).call(this, props));
+
+    _this.state = {
+      comments: [],
+      commentBody: ""
+    };
+    return _this;
+  }
+
+  _createClass(Comments, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.props.callComments();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.props.comments.comments) {
+        return null;
+      }
+      console.log("rendered!");
+      var videoId = JSON.parse(this.props.videoId);
+      var displayCommentForm = this.props.currentUser ? _react2.default.createElement(_comments_form_container2.default, { userId: currentUser.id, videoId: videoId, createNewComment: this.props.createNewComment }) : _react2.default.createElement(
+        'span',
+        null,
+        'login to comment'
+      );
+
+      var relatedComments = Object.values(this.props.comments.comments).filter(function (comment) {
+        return comment.video_id === videoId;
+      });
+      var renderedComments = relatedComments.map(function (comment) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'comments-inner-container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'comment-box' },
+            _react2.default.createElement(
+              'h2',
+              null,
+              'author: ',
+              comment.author.username
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              comment.body
+            )
+          )
+        );
+      });
+
+      return _react2.default.createElement(
+        'section',
+        { className: 'comments-outer-container' },
+        _react2.default.createElement(
+          'div',
+          null,
+          renderedComments
+        ),
+        _react2.default.createElement(
+          'div',
+          null,
+          displayCommentForm
+        )
+      );
+    }
+  }]);
+
+  return Comments;
+}(_react2.default.Component);
+
+exports.default = Comments;
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comments_container.js":
+/*!************************************************************!*\
+  !*** ./frontend/components/comments/comments_container.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _comment_actions = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
+var _comments = __webpack_require__(/*! ./comments */ "./frontend/components/comments/comments.jsx");
+
+var _comments2 = _interopRequireDefault(_comments);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.session.currentUser,
+    comments: state.entities.comments,
+    currentVideoId: state.videoId
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    callComments: function callComments() {
+      return dispatch((0, _comment_actions.callComments)());
+    },
+    createNewComment: function createNewComment(comment) {
+      return dispatch((0, _comment_actions.createNewComment)(comment));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_comments2.default);
+
+/***/ }),
+
+/***/ "./frontend/components/comments/comments_form_container.js":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/comments/comments_form_container.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/react.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
+var _comment_actions = __webpack_require__(/*! ../../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
+var _comment_form = __webpack_require__(/*! ./comment_form */ "./frontend/components/comments/comment_form.jsx");
+
+var _comment_form2 = _interopRequireDefault(_comment_form);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(_ref) {
+  var errors = _ref.errors;
+
+  return {
+    errors: errors
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    callComments: function callComments() {
+      return dispatch((0, _comment_actions.callComments)());
+    },
+    createNewComment: function createNewComment(comment) {
+      return dispatch((0, _comment_actions.createNewComment)(comment));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_comment_form2.default);
 
 /***/ }),
 
@@ -1275,6 +1666,10 @@ var _video_detail = __webpack_require__(/*! ../video/video_detail */ "./frontend
 
 var _video_detail2 = _interopRequireDefault(_video_detail);
 
+var _comments_container = __webpack_require__(/*! ../comments/comments_container */ "./frontend/components/comments/comments_container.js");
+
+var _comments_container2 = _interopRequireDefault(_comments_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1317,7 +1712,8 @@ var Show = function (_React$Component) {
             'div',
             { className: "videoItemContainer" },
             _react2.default.createElement(_video_detail2.default, { video: this.props.currentVideo[this.props.match.params.id] })
-          )
+          ),
+          _react2.default.createElement(_comments_container2.default, { videoId: this.props.match.params.id })
         )
       );
     }
@@ -1589,13 +1985,13 @@ var VideoDetail = function (_React$Component) {
               'div',
               null,
               _react2.default.createElement(
-                'h4',
-                { className: 'ui header' },
+                'h1',
+                { className: 'video-header' },
                 this.props.video.title
               ),
               _react2.default.createElement(
                 'p',
-                null,
+                { className: 'video-description' },
                 this.props.video.description
               )
             )
@@ -1718,6 +2114,47 @@ exports.default = VideoList;
 
 /***/ }),
 
+/***/ "./frontend/reducers/comments.js":
+/*!***************************************!*\
+  !*** ./frontend/reducers/comments.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _comment_actions = __webpack_require__(/*! ../actions/comment_actions */ "./frontend/actions/comment_actions.js");
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _nullSession = {
+  currentUser: null
+};
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case _comment_actions.RECEIVE_COMMENTS:
+      return Object.assign({}, action.comments);
+    case _comment_actions.RECEIVE_CURRENT_COMMENT:
+      return Object.assign({}, { comment: action.comment }, state);
+    case _comment_actions.REMOVE_COMMENT:
+      var deleted = _defineProperty({}, action.comment.id, null);
+    default:
+      return state;
+  }
+};
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities.js":
 /*!***************************************!*\
   !*** ./frontend/reducers/entities.js ***!
@@ -1742,6 +2179,10 @@ var _videos = __webpack_require__(/*! ./videos */ "./frontend/reducers/videos.js
 
 var _videos2 = _interopRequireDefault(_videos);
 
+var _comments = __webpack_require__(/*! ./comments */ "./frontend/reducers/comments.js");
+
+var _comments2 = _interopRequireDefault(_comments);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import videos from './videos_reducer';
@@ -1749,7 +2190,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _redux.combineReducers)({
   users: _users2.default,
-  videos: _videos2.default
+  videos: _videos2.default,
+  comments: _comments2.default
 });
 
 /***/ }),
@@ -1887,7 +2329,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 // import { RECEIVE_REVIEW, RECEIVE_BENCH } from '../actions/bench_actions';
 
-var usersReducer = function usersReducer() {
+exports.default = function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments[1];
 
@@ -1900,7 +2342,7 @@ var usersReducer = function usersReducer() {
   }
 };
 
-exports.default = usersReducer;
+// export default usersReducer;
 
 /***/ }),
 
@@ -2006,6 +2448,43 @@ var thunk = function thunk(_ref) {
 };
 
 exports.default = thunk;
+
+/***/ }),
+
+/***/ "./frontend/utils/comments.js":
+/*!************************************!*\
+  !*** ./frontend/utils/comments.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var fetchComments = exports.fetchComments = function fetchComments() {
+  return $.ajax({
+    url: '/api/comments/',
+    method: 'GET'
+  });
+};
+
+var postComment = exports.postComment = function postComment(comment) {
+  return $.ajax({
+    url: '/api/comments',
+    method: 'POST',
+    data: { comment: comment }
+  });
+};
+
+var deleteComment = exports.deleteComment = function deleteComment(commentId) {
+  return $.ajax({
+    url: '/api/comments/' + commentId,
+    method: 'DELETE'
+  });
+};
 
 /***/ }),
 
