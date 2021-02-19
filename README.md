@@ -9,7 +9,7 @@ Things you may want to cover:
 
 * ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin19]
 
-* System dependencies
+* System dependencies:
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
