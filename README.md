@@ -5,8 +5,6 @@
 These steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
-
 * ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-darwin19]
 
 * System dependencies:<br />
@@ -29,8 +27,6 @@ Things you may want to cover:
     "redux-devtools-extension": "^2.13.8",<br />
     "redux-logger": "^3.0.6",<br />
     "webpack": "^4.46.0"<br />
-
-* Configuration<br />
 
 * rails postgres db commands<br />
   rails new <e.g. viewTube> --database=postgresql<br />
