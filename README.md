@@ -32,8 +32,8 @@ Things you may want to cover:
 
 * Configuration
 
-* rails postgres db commands
-  rails new <e.g. viewTube> --database=postgresql
+* rails postgres db commands<br />
+  rails new <e.g. viewTube> --database=postgresql<br />
   rails db:setup
 
 * How to run the test suite
