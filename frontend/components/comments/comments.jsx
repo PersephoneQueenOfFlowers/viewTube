@@ -25,13 +25,14 @@ class Comments extends React.Component {
     ) : (<span>login to comment</span>)
 
     const relatedComments = Object.values(this.props.comments.comments).filter(comment => comment.video_id === videoId)
-    const renderedComments = relatedComments.map(comment => {
+    const renderedComments = relatedComments.map(comment => {  
       return (
         <div className="comments-inner-container">
   
           <div className="comment-box">
             <h2>author: {comment.author.username}</h2>
             <p>{comment.body}</p>
+            <button onClick={() => this.props.removeCurrentComment(comment.id)}>remove</button>
           </div>
         </div>
       )

@@ -123,7 +123,8 @@ var receiveComments = function receiveComments(comments) {
 
 var removeComment = function removeComment(commentId) {
   return {
-    type: REMOVE_COMMENT
+    type: REMOVE_COMMENT,
+    commentId: commentId
   };
 };
 
@@ -515,6 +516,8 @@ var Comments = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       if (!this.props.comments.comments) {
         return null;
       }
@@ -545,6 +548,13 @@ var Comments = function (_React$Component) {
               'p',
               null,
               comment.body
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.props.removeCurrentComment(comment.id);
+                } },
+              'remove'
             )
           )
         );
@@ -617,6 +627,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     createNewComment: function createNewComment(comment) {
       return dispatch((0, _comment_actions.createNewComment)(comment));
+    },
+    removeCurrentComment: function removeCurrentComment(comment) {
+      return dispatch((0, _comment_actions.removeCurrentComment)(comment));
     }
   };
 };
@@ -668,6 +681,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     createNewComment: function createNewComment(comment) {
       return dispatch((0, _comment_actions.createNewComment)(comment));
+    },
+    removeCurrentComment: function removeCurrentComment(comment) {
+      return dispatch((0, _comment_actions.removeCurrentComment)(comment));
     }
   };
 };
@@ -2129,8 +2145,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _comment_actions = __webpack_require__(/*! ../actions/comment_actions */ "./frontend/actions/comment_actions.js");
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var _nullSession = {
   currentUser: null
 };
@@ -2140,13 +2154,15 @@ exports.default = function () {
   var action = arguments[1];
 
   Object.freeze(state);
+  var newState = Object.assign({}, state);
   switch (action.type) {
     case _comment_actions.RECEIVE_COMMENTS:
       return Object.assign({}, action.comments);
     case _comment_actions.RECEIVE_CURRENT_COMMENT:
       return Object.assign({}, { comment: action.comment }, state);
     case _comment_actions.REMOVE_COMMENT:
-      var deleted = _defineProperty({}, action.comment.id, null);
+      delete newState.comments[action.commentId];
+      return newState;
     default:
       return state;
   }
@@ -2415,7 +2431,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function () {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return (0, _redux.createStore)(_root2.default, preloadedState, (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_thunk2.default)));
+  return (0, _redux.createStore)(_root2.default, preloadedState, (0, _reduxDevtoolsExtension.composeWithDevTools)((0, _redux.applyMiddleware)(_thunk2.default, _reduxLogger2.default)));
 };
 
 /***/ }),

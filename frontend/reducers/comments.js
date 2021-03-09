@@ -6,14 +6,17 @@ const _nullSession = {
 
 export default (state = {}, action) => {
   Object.freeze(state); 
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_COMMENTS:
       return Object.assign({},  action.comments );
     case RECEIVE_CURRENT_COMMENT:
       return Object.assign({}, {comment: action.comment}, state );
     case REMOVE_COMMENT:
-      const deleted = { [action.comment.id]: null };
+      delete newState.comments[action.commentId]
+      return newState;
     default:
       return state;
   }
 };
+
