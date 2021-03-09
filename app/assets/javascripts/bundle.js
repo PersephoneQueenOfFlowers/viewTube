@@ -99,13 +99,14 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.removeCurrentComment = exports.callComments = exports.createNewComment = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENTS = exports.RECEIVE_CURRENT_COMMENT = undefined;
+exports.updateCurrentComment = exports.removeCurrentComment = exports.callComments = exports.createNewComment = exports.UPDATE_COMMENT = exports.REMOVE_COMMENT = exports.RECEIVE_COMMENTS = exports.RECEIVE_CURRENT_COMMENT = undefined;
 
 var _comments = __webpack_require__(/*! ../utils/comments */ "./frontend/utils/comments.js");
 
 var RECEIVE_CURRENT_COMMENT = exports.RECEIVE_CURRENT_COMMENT = 'RECEIVE_CURRENT_COMMENT';
 var RECEIVE_COMMENTS = exports.RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 var REMOVE_COMMENT = exports.REMOVE_COMMENT = "REMOVE_COMMENT";
+var UPDATE_COMMENT = exports.UPDATE_COMMENT = "UPDATE_COMMENT";
 
 var receiveCurrentComment = function receiveCurrentComment(comment) {
   return {
@@ -125,6 +126,13 @@ var removeComment = function removeComment(commentId) {
   return {
     type: REMOVE_COMMENT,
     commentId: commentId
+  };
+};
+
+var updateComment = function updateComment(comment) {
+  return {
+    type: UPDATE_COMMENT,
+    comment: comment
   };
 };
 
@@ -151,6 +159,14 @@ var removeCurrentComment = exports.removeCurrentComment = function removeCurrent
   return function (dispatch) {
     return (0, _comments.deleteComment)(commentId).then(function () {
       return dispatch(removeComment(commentId));
+    });
+  };
+};
+
+var updateCurrentComment = exports.updateCurrentComment = function updateCurrentComment(comment) {
+  return function (dispatch) {
+    return (0, _comments.modifyComment)(comment).then(function () {
+      return dispatch(updateComment(comment));
     });
   };
 };
@@ -420,11 +436,6 @@ var CommentForm = function (_React$Component) {
       this.setState({ commentBody: " " });
       window.location.reload();
     }
-
-    // componentDidUnmount(){
-    //   window.location.reload(false);
-    // }
-
   }, {
     key: "render",
     value: function render() {
@@ -503,12 +514,37 @@ var Comments = function (_React$Component) {
 
     _this.state = {
       comments: [],
-      commentBody: ""
+      commentBody: "",
+      showHideCommentUpdate: false,
+      commentUpdateButton: "update"
     };
+    _this.showCommentForm = _this.showCommentForm.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
   _createClass(Comments, [{
+    key: 'showCommentForm',
+    value: function showCommentForm(body) {
+      this.state.showHideCommentUpdate ? this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" }) : this.setState({ showHideCommentUpdate: true, commentUpdateButton: "hide", commentBody: body });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(comment, commentBody) {
+      comment.body = commentBody;
+      this.props.updateCurrentComment(comment);
+      this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" });
+    }
+  }, {
+    key: 'handleInput',
+    value: function handleInput() {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState({ commentBody: e.target.value });
+      };
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.callComments();
@@ -516,13 +552,13 @@ var Comments = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (!this.props.comments.comments) {
         return null;
       }
       var videoId = JSON.parse(this.props.videoId);
-      var displayCommentForm = this.props.currentUser ? _react2.default.createElement(_comments_form_container2.default, { userId: currentUser.id, videoId: videoId, createNewComment: this.props.createNewComment }) : _react2.default.createElement(
+      var displayCommentForm = this.props.currentUser ? _react2.default.createElement(_comments_form_container2.default, { userId: this.props.currentUser.id, videoId: videoId, createNewComment: this.props.createNewComment }) : _react2.default.createElement(
         'span',
         null,
         'login to comment'
@@ -549,13 +585,39 @@ var Comments = function (_React$Component) {
               null,
               comment.body
             ),
-            _react2.default.createElement(
-              'button',
-              { onClick: function onClick() {
-                  return _this2.props.removeCurrentComment(comment.id);
-                } },
-              'remove'
-            )
+            _this3.props.currentUser.id === comment.author.id ? _react2.default.createElement(
+              'div',
+              { className: 'update-delete' },
+              _react2.default.createElement(
+                'button',
+                { onClick: function onClick() {
+                    return _this3.props.removeCurrentComment(comment.id);
+                  } },
+                'remove'
+              ),
+              _react2.default.createElement(
+                'button',
+                { onClick: function onClick() {
+                    return _this3.showCommentForm(comment.body);
+                  } },
+                _this3.state.commentUpdateButton
+              ),
+              _react2.default.createElement(
+                'form',
+                { className: _this3.state.showHideCommentUpdate ? "visible" : "hidden" },
+                _react2.default.createElement('input', { type: 'textarea',
+                  value: _this3.state.commentBody,
+                  onChange: _this3.handleInput()
+                }),
+                _react2.default.createElement(
+                  'button',
+                  { type: 'submit', onClick: function onClick() {
+                      return _this3.handleSubmit(comment, _this3.state.commentBody);
+                    } },
+                  'update comment'
+                )
+              )
+            ) : _react2.default.createElement('span', null)
           )
         );
       });
@@ -630,6 +692,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     removeCurrentComment: function removeCurrentComment(comment) {
       return dispatch((0, _comment_actions.removeCurrentComment)(comment));
+    },
+    updateCurrentComment: function updateCurrentComment(comment) {
+      return dispatch((0, _comment_actions.updateCurrentComment)(comment));
     }
   };
 };
@@ -2163,6 +2228,8 @@ exports.default = function () {
     case _comment_actions.REMOVE_COMMENT:
       delete newState.comments[action.commentId];
       return newState;
+    case _comment_actions.UPDATE_COMMENT:
+      return Object.assign({}, action.comment, state);
     default:
       return state;
   }
@@ -2498,6 +2565,14 @@ var deleteComment = exports.deleteComment = function deleteComment(commentId) {
   return $.ajax({
     url: '/api/comments/' + commentId,
     method: 'DELETE'
+  });
+};
+
+var modifyComment = exports.modifyComment = function modifyComment(comment) {
+  return $.ajax({
+    url: '/api/comments/' + comment.id,
+    method: 'PATCH',
+    data: { comment: comment }
   });
 };
 

@@ -22,7 +22,6 @@ v1 = Video.create({title:"fuel trucks parking", description:"fuel trucks parking
 v2 = Video.create({title:"trail walkers", description:"a bit of hiking for some cardio and nature"})
 v3 = Video.create({title:"Mile 22",description:"American action thriller film directed by Peter Berg and written by Lea Carpenter, from a story by Carpenter and Graham Roland. The film stars Mark Wahlberg, Iko Uwais, John Malkovich, Lauren Cohan, and Ronda Rousey."})
 v4 = Video.create({title:"sumo wrestling David vs Goliath", description:"smaller sumo wrestler defeats larger one in an upset"})
-
 v5 = Video.create({title:"Alice in Wonderland", description:"A 1951 American animated musical fantasy film produced by Walt Disney Productions and based on the Alice books by Lewis Carroll."})
 v6 = Video.create({title:"Barbarella", description:"A 1968 science fiction film directed by Roger Vadim, based on the French comic series of the same name by Jean-Claude Forest."})
 v7 = Video.create({title:"Batman1989",description:"American superhero film directed by Tim Burton and produced by Jon Peters and Peter Guber, based on the DC Comics character of the same name."})

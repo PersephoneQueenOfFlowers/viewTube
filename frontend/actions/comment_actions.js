@@ -1,8 +1,9 @@
-import { postComment, fetchComments, deleteComment } from '../utils/comments';
+import { postComment, fetchComments, deleteComment, modifyComment } from '../utils/comments';
 
 export const RECEIVE_CURRENT_COMMENT = 'RECEIVE_CURRENT_COMMENT';
 export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
 
 const receiveCurrentComment = comment => {
   return {
@@ -25,6 +26,13 @@ const removeComment = commentId => {
   }
 }
 
+const updateComment = comment => {
+  return {
+    type: UPDATE_COMMENT,
+    comment
+  }
+}
+
 export const createNewComment = comment => dispatch => postComment(comment)
   .then(comment => {
     return dispatch(receiveCurrentComment(comment))
@@ -41,5 +49,11 @@ export const callComments = () => dispatch => fetchComments()
 export const removeCurrentComment = (commentId) => dispatch => deleteComment(commentId)
   .then(() => {
     return dispatch(removeComment(commentId))
+  }
+  );
+
+export const updateCurrentComment = (comment) => dispatch => modifyComment(comment)
+  .then(() => {
+    return dispatch(updateComment(comment))
   }
   );

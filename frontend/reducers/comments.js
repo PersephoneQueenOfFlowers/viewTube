@@ -1,4 +1,4 @@
-import { RECEIVE_CURRENT_COMMENT, RECEIVE_COMMENTS, REMOVE_COMMENT } from '../actions/comment_actions';
+import { RECEIVE_CURRENT_COMMENT, RECEIVE_COMMENTS, REMOVE_COMMENT, UPDATE_COMMENT } from '../actions/comment_actions';
 
 const _nullSession = {
   currentUser: null
@@ -15,6 +15,8 @@ export default (state = {}, action) => {
     case REMOVE_COMMENT:
       delete newState.comments[action.commentId]
       return newState;
+    case UPDATE_COMMENT:
+      return Object.assign({}, action.comment, state);
     default:
       return state;
   }

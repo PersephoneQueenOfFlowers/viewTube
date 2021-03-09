@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { callComments, createNewComment, removeCurrentComment } from '../../actions/comment_actions';
+import { callComments, createNewComment, removeCurrentComment, updateCurrentComment } from '../../actions/comment_actions';
 import Comments from './comments';
 
 const mapStateToProps = (state) => {
@@ -14,7 +14,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   callComments: () => dispatch(callComments()),
   createNewComment: (comment) => dispatch(createNewComment(comment)),
-  removeCurrentComment: (comment) => dispatch(removeCurrentComment(comment))
+  removeCurrentComment: (comment) => dispatch(removeCurrentComment(comment)),
+  updateCurrentComment: (comment) => dispatch(updateCurrentComment(comment))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);

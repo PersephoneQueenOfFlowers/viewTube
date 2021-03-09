@@ -25,10 +25,6 @@ class CommentForm extends React.Component{
       window.location.reload();
   }
 
-  // componentDidUnmount(){
-  //   window.location.reload(false);
-  // }
-
   render(){
     return (
       <form className="createComment">

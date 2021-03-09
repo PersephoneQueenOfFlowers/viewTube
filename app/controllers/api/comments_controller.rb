@@ -12,16 +12,14 @@ class Api::CommentsController < ApplicationController
   # check if comment creator is same as current user 
   def update
     @user = current_user
-    # @comment = 
-    debugger 
-    # @user = selected_user
-    # if @user && @user.update_attributes(user_params)
-    #   render :show
-    # elsif !@user
-    #   render json: ['Could not locate user'], status: 400
-    # else
-    #   render json: @user.errors.full_messages, status: 401
-    # end
+    @comment = Comment.find(params[:id].to_i)
+    @comments = Comment.all 
+    success = @comment.update(comment_params)
+    if success 
+      render json: @comments
+    else  
+      render json: errors.full_messages, status: :unprocessable_entity
+    end
   end
   
   def index
@@ -34,7 +32,7 @@ class Api::CommentsController < ApplicationController
     @user = current_user
     if @comment && @comment.author_id == @user.id 
       @comment.destroy
-       @comments = Comment.all 
+      @comments = Comment.all 
       render :index
     else
       render ['Could not find commemnt']
