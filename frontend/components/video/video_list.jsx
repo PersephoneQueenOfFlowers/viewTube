@@ -20,11 +20,3 @@ const VideoList = ( videos) => {
 };
 
 export default VideoList;
-
-/**
-<VideoItem
-  key={video.id}
-  onVideoSelect={onVideoSelect}
-  video={video}
-/>
-**/

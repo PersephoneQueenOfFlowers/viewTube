@@ -108,10 +108,10 @@ var RECEIVE_COMMENTS = exports.RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 var REMOVE_COMMENT = exports.REMOVE_COMMENT = "REMOVE_COMMENT";
 var UPDATE_COMMENT = exports.UPDATE_COMMENT = "UPDATE_COMMENT";
 
-var receiveCurrentComment = function receiveCurrentComment(comment) {
+var receiveCurrentComment = function receiveCurrentComment(comments) {
   return {
     type: RECEIVE_CURRENT_COMMENT,
-    comment: comment
+    comments: comments
   };
 };
 
@@ -413,7 +413,6 @@ var CommentForm = function (_React$Component) {
       body: "",
       author_id: _this.props.userId,
       video_id: _this.props.videoId
-
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
@@ -431,10 +430,8 @@ var CommentForm = function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
-      e.preventDefault();
       this.props.createNewComment(this.state);
-      this.setState({ commentBody: " " });
-      window.location.reload();
+      this.setState({ body: " " });
     }
   }, {
     key: "render",
@@ -448,7 +445,7 @@ var CommentForm = function (_React$Component) {
           _react2.default.createElement("label", null),
           _react2.default.createElement("textarea", {
             name: "body",
-            value: this.state.commentBody,
+            value: this.state.body,
             onChange: this.handleInput()
           })
         ),
@@ -525,15 +522,22 @@ var Comments = function (_React$Component) {
 
   _createClass(Comments, [{
     key: 'showCommentForm',
-    value: function showCommentForm(body) {
-      this.state.showHideCommentUpdate ? this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" }) : this.setState({ showHideCommentUpdate: true, commentUpdateButton: "hide", commentBody: body });
+    value: function showCommentForm(e) {
+      var textPara = e.target.parentNode.previousSibling.innerText;
+      var nextSibling = e.target.nextElementSibling;
+      nextSibling.classList.toggle("hidden");
+      var buttonText = e.target.innerHTML;
+      e.target.innerHTML === "update" ? e.target.innerHTML = "change mind" : e.target.innerHTML = "update";
+      e.target.nextElementSibling.firstElementChild.value = textPara;
     }
   }, {
     key: 'handleSubmit',
-    value: function handleSubmit(comment, commentBody) {
+    value: function handleSubmit(e, comment, commentBody) {
       comment.body = commentBody;
-      this.props.updateCurrentComment(comment);
       this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" });
+      $('.changeText').addClass("hidden");
+      $('.updateBtn').text("update");
+      this.props.updateCurrentComment(comment);
     }
   }, {
     key: 'handleInput',
@@ -585,7 +589,7 @@ var Comments = function (_React$Component) {
               null,
               comment.body
             ),
-            _this3.props.currentUser.id === comment.author.id ? _react2.default.createElement(
+            _this3.props.currentUser && _this3.props.currentUser.id === comment.author.id ? _react2.default.createElement(
               'div',
               { className: 'update-delete' },
               _react2.default.createElement(
@@ -597,22 +601,22 @@ var Comments = function (_React$Component) {
               ),
               _react2.default.createElement(
                 'button',
-                { onClick: function onClick() {
-                    return _this3.showCommentForm(comment.body);
+                { className: 'updateBtn', onClick: function onClick(e) {
+                    return _this3.showCommentForm(e);
                   } },
                 _this3.state.commentUpdateButton
               ),
               _react2.default.createElement(
                 'form',
-                { className: _this3.state.showHideCommentUpdate ? "visible" : "hidden" },
+                { className: 'hidden changeText' },
                 _react2.default.createElement('input', { type: 'textarea',
                   value: _this3.state.commentBody,
                   onChange: _this3.handleInput()
                 }),
                 _react2.default.createElement(
                   'button',
-                  { type: 'submit', onClick: function onClick() {
-                      return _this3.handleSubmit(comment, _this3.state.commentBody);
+                  { type: 'submit', onClick: function onClick(e) {
+                      return _this3.handleSubmit(e, comment, _this3.state.commentBody);
                     } },
                   'update comment'
                 )
@@ -863,7 +867,7 @@ var Home = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 
     $(".nav .right *, .nav .center").css("visibility", "visible");
-    _this.state = { videos: [] };
+    _this.state = { videos: [], autoplay: false };
 
     return _this;
   }
@@ -1768,7 +1772,8 @@ var Show = function (_React$Component) {
 
     $(".nav .right *, .nav .center").css("visibility", "visible");
     _this.state = {
-      video: {}
+      video: {},
+      autoplay: "autoPlay"
     };
     return _this;
   }
@@ -1790,7 +1795,7 @@ var Show = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: "videoItemContainer" },
-            _react2.default.createElement(_video_detail2.default, { video: this.props.currentVideo[this.props.match.params.id] })
+            _react2.default.createElement(_video_detail2.default, { autoplay: 'true', video: this.props.currentVideo[this.props.match.params.id] })
           ),
           _react2.default.createElement(_comments_container2.default, { videoId: this.props.match.params.id })
         )
@@ -2046,6 +2051,8 @@ var VideoDetail = function (_React$Component) {
         selected = "unSelected";
       }
 
+      var autoPlay = this.props.autoplay ? true : false;
+
       return _react2.default.createElement(
         'div',
         { id: this.props.video.id, className: selected },
@@ -2055,7 +2062,11 @@ var VideoDetail = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'ui embed' },
-            _react2.default.createElement('video', { controls: true, title: 'video player', src: videoSrc })
+            _react2.default.createElement(
+              'video',
+              { controls: true, title: 'video player' },
+              _react2.default.createElement('source', { src: videoSrc, type: 'video/mp4' })
+            )
           ),
           _react2.default.createElement(
             'div',
@@ -2184,14 +2195,6 @@ var VideoList = function VideoList(videos) {
 
 exports.default = VideoList;
 
-/**
-<VideoItem
-  key={video.id}
-  onVideoSelect={onVideoSelect}
-  video={video}
-/>
-**/
-
 /***/ }),
 
 /***/ "./frontend/reducers/comments.js":
@@ -2224,7 +2227,8 @@ exports.default = function () {
     case _comment_actions.RECEIVE_COMMENTS:
       return Object.assign({}, action.comments);
     case _comment_actions.RECEIVE_CURRENT_COMMENT:
-      return Object.assign({}, { comment: action.comment }, state);
+      newState.comments[action.comments.id] = action.comments;
+      return newState;
     case _comment_actions.REMOVE_COMMENT:
       delete newState.comments[action.commentId];
       return newState;

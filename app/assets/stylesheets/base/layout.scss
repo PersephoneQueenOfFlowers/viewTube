@@ -86,6 +86,28 @@ body{
       line-height: 25px;
       margin: 20px 0;
       font-size: 1.75rem;
+      .changeText input {
+        margin: 0px;
+        width: 261px;
+        height: 30px;
+        -webkit-flex: 1;
+        flex: 1;
+        -webkit-flex-basis: 0.000000001px;
+        flex-basis: 0.000000001px;
+        margin-left: 1px;
+        padding: 2px 8px;
+        min-width: 645px;
+        line-height: 28px;
+        border: none;
+        background-color: #121212;
+        box-shadow: none;
+        text-align: inherit;
+        color: inherit;
+        font-family: 'Roboto','Noto',sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        outline: none;
+      }
     }
     .createComment {
       display: flex;

@@ -19,12 +19,16 @@ class VideoDetail extends React.Component{
     }else {
       selected = "unSelected"
     }
+
+    const autoPlay = this.props.autoplay ? true : false 
   
     return (
       <div id={this.props.video.id} className={selected}>
         <Link to={`/show/${this.props.video.id}`}>
           <div className="ui embed">
-            <video controls title="video player" src={videoSrc} />
+            <video controls title="video player">
+              <source src={videoSrc} type="video/mp4" />
+            </video>
           </div>
           <div className="ui segment">
             <div>

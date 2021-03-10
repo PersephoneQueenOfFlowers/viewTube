@@ -9,9 +9,10 @@ export default (state = {}, action) => {
   const newState = Object.assign({}, state);
   switch (action.type) {
     case RECEIVE_COMMENTS:
-      return Object.assign({},  action.comments );
+      return Object.assign({}, action.comments );
     case RECEIVE_CURRENT_COMMENT:
-      return Object.assign({}, {comment: action.comment}, state );
+      newState.comments[action.comments.id] = action.comments;
+      return newState;
     case REMOVE_COMMENT:
       delete newState.comments[action.commentId]
       return newState;

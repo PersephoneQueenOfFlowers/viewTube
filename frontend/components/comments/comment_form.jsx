@@ -7,7 +7,6 @@ class CommentForm extends React.Component{
       body: "",
       author_id: this.props.userId,
       video_id: this.props.videoId
-
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -19,10 +18,8 @@ class CommentForm extends React.Component{
   }
 
   handleSubmit(e){
-    e.preventDefault();
     this.props.createNewComment(this.state);
-    this.setState({ commentBody: " "});
-      window.location.reload();
+    this.setState({ body: " "});
   }
 
   render(){
@@ -32,7 +29,7 @@ class CommentForm extends React.Component{
           <label></label>
           <textarea
             name="body"
-            value={this.state.commentBody}
+            value={this.state.body}
             onChange={this.handleInput()}
           />
         </div>

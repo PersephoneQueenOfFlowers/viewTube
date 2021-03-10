@@ -5,10 +5,10 @@ export const RECEIVE_COMMENTS = "RECEIVE_COMMENTS";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
 
-const receiveCurrentComment = comment => {
+const receiveCurrentComment = comments => {
   return {
     type: RECEIVE_CURRENT_COMMENT,
-    comment
+    comments
   }
 }
 

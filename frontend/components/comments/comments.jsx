@@ -14,16 +14,21 @@ class Comments extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  showCommentForm(body){
-    this.state.showHideCommentUpdate ? 
-      this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" }) :
-      this.setState({ showHideCommentUpdate: true, commentUpdateButton: "hide", commentBody: body}); 
+  showCommentForm(e){
+    let textPara = e.target.parentNode.previousSibling.innerText;
+    let nextSibling = e.target.nextElementSibling;
+    nextSibling.classList.toggle("hidden");
+    let buttonText = e.target.innerHTML; 
+    e.target.innerHTML === "update" ? e.target.innerHTML = "change mind" : e.target.innerHTML = "update";  
+    e.target.nextElementSibling.firstElementChild.value = textPara;
   }
 
-  handleSubmit(comment, commentBody){ 
+  handleSubmit(e, comment, commentBody){ 
     comment.body = commentBody;
-    this.props.updateCurrentComment(comment);
     this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" });
+    $('.changeText').addClass("hidden");
+    $('.updateBtn').text("update");
+    this.props.updateCurrentComment(comment);
   }
 
   handleInput() {
@@ -54,16 +59,16 @@ class Comments extends React.Component {
             <h2>author: {comment.author.username}</h2>
             <p>{comment.body}</p>
             {
-              this.props.currentUser.id === comment.author.id ? 
+              this.props.currentUser && this.props.currentUser.id === comment.author.id ? 
               <div className="update-delete">
                 <button onClick={() => this.props.removeCurrentComment(comment.id)}>remove</button> 
-                  <button onClick={() => this.showCommentForm(comment.body)}>{this.state.commentUpdateButton}</button>
-                  <form className={this.state.showHideCommentUpdate ? "visible":"hidden" }>
+                  <button className="updateBtn" onClick={(e) => this.showCommentForm(e)}>{this.state.commentUpdateButton}</button>
+                  <form className="hidden changeText">
                     <input type="textarea" 
                            value={this.state.commentBody} 
                            onChange={this.handleInput()}
                            />
-                    <button type="submit" onClick={() => this.handleSubmit(comment, this.state.commentBody)}>update comment</button>
+                    <button type="submit" onClick={(e) => this.handleSubmit(e,comment, this.state.commentBody)}>update comment</button>
                   </form> 
               </div>
             : <span></span>

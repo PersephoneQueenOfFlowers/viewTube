@@ -9,7 +9,8 @@ class Show extends React.Component {
     super(props)
     $(".nav .right *, .nav .center").css("visibility", "visible");
     this.state = { 
-      video: {}
+      video: {},
+      autoplay: "autoPlay"
     }
   }
 
@@ -22,7 +23,7 @@ class Show extends React.Component {
       <div>
         <div className="show">
           <div className={"videoItemContainer"}>
-            <VideoDetail video={this.props.currentVideo[this.props.match.params.id]} />
+            <VideoDetail autoplay="true" video={this.props.currentVideo[this.props.match.params.id]} />
           </div>
           <CommentsContainer videoId={this.props.match.params.id} />
         </div>

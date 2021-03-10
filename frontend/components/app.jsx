@@ -13,16 +13,18 @@ import {
 import { AuthRoute, ProtectedRoute } from '../utils/route_util';
 
 export default () => (
-  <div>
-    <header>
-      <NavBarContainer />
-    </header>
-    <Switch>
-      <AuthRoute path="/signup" component={SignupContainer} />
-      <AuthRoute path="/login" component={LoginContainer} />
-      <Route path="/show/:id" component={ShowContainer} /> 
-      <Route exact path="/" component={HomeContainer} />
-      <Redirect to="/" /> 
-    </Switch>
-  </div>
+
+    <div>
+      <header>
+        <NavBarContainer />
+      </header>
+      <Switch>
+        <AuthRoute path="/signup" component={SignupContainer} />
+        <AuthRoute path="/login" component={LoginContainer} />
+        <Route path="/show/:id" component={ShowContainer} /> 
+        <Route exact path="/" component={HomeContainer} />
+        <Redirect to="/" /> 
+      </Switch>
+    </div>
+
 );

@@ -7,7 +7,7 @@ class Home extends React.Component{
   constructor(props){
     super(props)
     $(".nav .right *, .nav .center").css("visibility", "visible");
-    this.state = {videos: []}
+    this.state = {videos: [], autoplay: false}
 
   }
 
