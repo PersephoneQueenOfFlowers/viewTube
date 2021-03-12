@@ -35,6 +35,9 @@ class VideoDetail extends React.Component{
               <h1 className="video-header">{this.props.video.title}</h1>
               <p className="video-description">{this.props.video.description}</p>
             </div>
+            <div className="shares-likes">
+
+            </div>
           </div>
         </Link>
       </div>
