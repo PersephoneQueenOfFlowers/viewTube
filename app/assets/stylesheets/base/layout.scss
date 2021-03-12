@@ -1,16 +1,20 @@
-body{
-  color: #fff;
-  background: #202020;
-  font-family: 'Roboto', 'Noto', sans-serif;
-  header {
-    position: fixed;
-    top: 0;
-    z-index: 100000;
+html{
+  --lh: 1.55rem;
+  line-height: var(--lh);
+  body{
+    color: #fff;
     background: #202020;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    header {
+      position: fixed;
+      top: 0;
+      z-index: 100000;
+      background: #202020;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
@@ -62,21 +66,22 @@ body{
         color: #fff;
         max-width: 50%;
       }
-      .shares-likes {
-        background-image: image-url('like-buttons.png');
-        background-size: 90.5%;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-position-y: 15px;
-        background-position-x: 45px;
-      }
+      // .shares-likes {
+      //   background-image: image-url('like-buttons.png');
+      //   background-size: 90.5%;
+      //   width: 100%;
+      //   background-repeat: no-repeat;
+      //   background-position-y: 15px;
+      //   background-position-x: 45px;
+      // }
       .video-header{
         font-size: 2rem;
       }
-      .video-description{
-        font-size: 1.25rem;
-        margin: 5px 0 20px;
-      }
+      // .video-description{
+      //   font-size: 1.25rem;
+      //   line-height: 1.6rem;
+      //   margin: 5px 0 20px;
+      // }
     }
   }
   .comments-outer-container {

@@ -2084,8 +2084,7 @@ var VideoDetail = function (_React$Component) {
                 { className: 'video-description' },
                 this.props.video.description
               )
-            ),
-            _react2.default.createElement('div', { className: 'shares-likes' })
+            )
           )
         )
       );

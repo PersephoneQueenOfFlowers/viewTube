@@ -106,11 +106,33 @@
     .segment {
       display: flex;
       justify-content: space-between;
-      width: 800px;
       > div {
-        margin: 20px 0px;
+        margin: 10px 5px;
         color: #fff;
-        max-width:280px;
+        box-sizing: border-box;
+        padding: 0 0 10px;
+        .video-description {
+           --max-lines: 3;
+          position: relative;
+          max-height: calc(var(--lh) * var(--max-lines));
+          line-height: 1.6rem;
+          overflow: hidden;
+          padding-right: 1rem; /* space for ellipsis */
+          &:before {
+            position: absolute;
+            content: "...";
+            inset-block-end: 0; /* "bottom" */
+            inset-inline-end: 0; /* "right" */
+          }
+          &:after {
+            content: "";
+            position: absolute;
+            inset-inline-end: 0; /* "right" */
+            width: 1rem;
+            height: 1rem;
+            background-color: #181818;
+          }
+        }
       }
     }
     h4 {
