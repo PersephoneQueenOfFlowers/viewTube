@@ -16,8 +16,87 @@
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
-  height: 520px;
   .videoItemContainer {
+    .embed {
+      background-size: cover;
+      background-position-y: center;
+      height: 180px;
+      video {
+        visibility: hidden;
+      }
+    }
+    &:nth-child(1) .embed{
+       background-image: url(thumbnails/fuel-trucks-parking.jpeg);
+    }
+    &:nth-child(2) .embed{
+       background-image: url(thumbnails/trail-hiking.jpeg);
+    }
+    &:nth-child(3) .embed{
+       background-image: url(thumbnails/mile-22.jpeg);
+    }
+    &:nth-child(4) .embed{
+       background-image: url(thumbnails/sumo-wrestling.jpeg);
+    }
+    &:nth-child(5) .embed{
+       background-image: url(thumbnails/alice-in-wonderland.jpeg);
+    }
+    &:nth-child(6) .embed{
+       background-image: url(thumbnails/barbarella.jpeg);
+    }
+    &:nth-child(7) .embed{
+       background-image: url(thumbnails/batman.jpeg);
+    }
+    &:nth-child(8) .embed{
+       background-image: url(thumbnails/enter-dragon.jpeg);
+    }
+    &:nth-child(9) .embed{
+       background-image: url(thumbnails/fourty-yo-virgin.jpeg);
+    }
+    &:nth-child(10) .embed{
+       background-image: url(thumbnails/frankenstein.jpeg);
+    }
+    &:nth-child(11) .embed{
+       background-image: url(thumbnails/harry-potter.jpeg);
+    }
+    &:nth-child(12) .embed{
+       background-image: url(thumbnails/itsawonderful-life.jpeg);
+    }
+    &:nth-child(13) .embed{
+       background-image: url(thumbnails/journey-to-the-center.jpeg);
+    }
+    &:nth-child(14) .embed{
+       background-image: url(thumbnails/king-kong-v-godzilla.jpeg);
+    }
+    &:nth-child(15) .embed{
+       background-image: url(thumbnails/obrother.jpeg);
+    }
+    &:nth-child(16) .embed{
+       background-image: url(thumbnails/omega-man.jpeg);
+    }
+    &:nth-child(17) .embed{
+       background-image: url(thumbnails/princess-bride.jpeg);
+    }
+    &:nth-child(18) .embed{
+       background-image: url(thumbnails/revenge-of-the-creature.jpeg);
+    }
+    &:nth-child(19) .embed{
+       background-image: url(thumbnails/robinson-crusoe.jpeg);
+    }
+    &:nth-child(20) .embed{
+       background-image: url(thumbnails/sound-of-music.jpeg);
+    }
+    &:nth-child(21) .embed{
+       background-image: url(thumbnails/spangebob-squarepants.jpeg);
+    }
+    &:nth-child(22) .embed{
+       background-image: url(thumbnails/to-catch-a-thief.jpeg);
+    }
+    &:nth-child(23) .embed{
+       background-image: url(thumbnails/war-of-the-worlds.jpeg);
+    }
+    &:nth-child(24) .embed{
+       background-image: url(thumbnails/willy-wonka.jpeg);
+    }
     flex: 1 0 21%;
     margin: 5px;
     height: auto;
