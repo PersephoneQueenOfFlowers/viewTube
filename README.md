@@ -35,6 +35,7 @@ application up and running.
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+
   While in app directory, run rails server
   While in frontend directory, run npm start
  
