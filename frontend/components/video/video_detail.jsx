@@ -4,14 +4,35 @@ import { Link } from 'react-router-dom';
 class VideoDetail extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      loading: true 
+    }
+  }
 
+  componentDidMount() {
+    const currentVideo = document.querySelector("video");
+    if(currentVideo){
+      currentVideo.addEventListener("loadeddata", () => {
+        this.setState({ loading: false });
+      });
+    }
   }
 
   render() {
-   
+    const loadedVideo = document.querySelector('.showVideo');
+
+
+
     if (!this.props.video) {
-      return <div>Loading...</div>
+      return <div className="loader">Loading...</div>
     }
+    // else {
+    //   const currentVideo = document.querySelector("video");
+    //   currentVideo.addEventListener("loadeddata", () => {
+    //     this.setState({ loading: false });
+    //   });
+    // }
+ 
     const videoSrc = `${this.props.video.videoUrl}`;
     let selected;
     if (this.props.video.id === this.props.selectedVideo){
@@ -26,7 +47,14 @@ class VideoDetail extends React.Component{
       <div id={this.props.video.id} className={selected}>
         <Link to={`/show/${this.props.video.id}`}>
           <div className="ui embed">
-            <video controls title="video player">
+            <video
+              className="showVideo"   
+              controls 
+              title="video player"
+              style={{
+                opacity: this.state.loading ? .25 : 1,
+                transition: "opacity, 2s ease-in-out"
+              }}>
               <source src={videoSrc} type="video/mp4" />
             </video>
           </div>
@@ -36,7 +64,7 @@ class VideoDetail extends React.Component{
               <p className="video-description">{this.props.video.description}</p>
             </div>
             <div className="shares-likes">
-          
+
             </div>
           </div>
         </Link>

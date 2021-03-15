@@ -1,16 +1,20 @@
-body{
-  color: #fff;
-  background: #202020;
-  font-family: 'Roboto', 'Noto', sans-serif;
-  header {
-    position: fixed;
-    top: 0;
-    z-index: 100000;
+html{
+  --lh: 1.55rem;
+  line-height: var(--lh);
+  body{
+    color: #fff;
     background: #202020;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+    font-family: 'Roboto', 'Noto', sans-serif;
+    header {
+      position: fixed;
+      top: 0;
+      z-index: 100000;
+      background: #202020;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 
@@ -45,12 +49,20 @@ body{
   background-color: #181818;
   .videoItemContainer {
     max-width: 800px;
+    min-width:800px;
     margin-top: 30px;
+    display:block;
+    .loader {
+      width: 800px;
+      height: 400px;
+      margin: 0 auto;
+    }
     a {
       text-decoration: none;
     }
     video {
-      max-width: 100%;
+      max-width: 800px;
+      min-width:800px;
     }
     .ui.segment {
       display: flex;
@@ -73,10 +85,11 @@ body{
       .video-header{
         font-size: 2rem;
       }
-      .video-description{
-        font-size: 1.25rem;
-        margin: 5px 0 20px;
-      }
+      // .video-description{
+      //   font-size: 1.25rem;
+      //   line-height: 1.6rem;
+      //   margin: 5px 0 20px;
+      // }
     }
   }
   .comments-outer-container {
