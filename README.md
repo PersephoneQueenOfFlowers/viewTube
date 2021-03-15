@@ -36,7 +36,7 @@ application up and running.
 
 * Deployment instructions
 
-  While in app directory, run rails server
+  While in app directory, run rails server<br />
   While in frontend directory, run npm start
  
   
