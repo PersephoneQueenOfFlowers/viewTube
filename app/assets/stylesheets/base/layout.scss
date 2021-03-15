@@ -49,12 +49,20 @@ html{
   background-color: #181818;
   .videoItemContainer {
     max-width: 800px;
+    min-width:800px;
     margin-top: 30px;
+    display:block;
+    .loader {
+      width: 800px;
+      height: 400px;
+      margin: 0 auto;
+    }
     a {
       text-decoration: none;
     }
     video {
-      max-width: 100%;
+      max-width: 800px;
+      min-width:800px;
     }
     .ui.segment {
       display: flex;
@@ -66,14 +74,14 @@ html{
         color: #fff;
         max-width: 50%;
       }
-      // .shares-likes {
-      //   background-image: image-url('like-buttons.png');
-      //   background-size: 90.5%;
-      //   width: 100%;
-      //   background-repeat: no-repeat;
-      //   background-position-y: 15px;
-      //   background-position-x: 45px;
-      // }
+      .shares-likes {
+        background-image: image-url('like-buttons.png');
+        background-size: 90.5%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position-y: 15px;
+        background-position-x: 45px;
+      }
       .video-header{
         font-size: 2rem;
       }

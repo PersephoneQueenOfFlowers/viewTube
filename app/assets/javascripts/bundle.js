@@ -2029,20 +2029,45 @@ var VideoDetail = function (_React$Component) {
   function VideoDetail(props) {
     _classCallCheck(this, VideoDetail);
 
-    return _possibleConstructorReturn(this, (VideoDetail.__proto__ || Object.getPrototypeOf(VideoDetail)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (VideoDetail.__proto__ || Object.getPrototypeOf(VideoDetail)).call(this, props));
+
+    _this.state = {
+      loading: true
+    };
+    return _this;
   }
 
   _createClass(VideoDetail, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var currentVideo = document.querySelector("video");
+      if (currentVideo) {
+        currentVideo.addEventListener("loadeddata", function () {
+          _this2.setState({ loading: false });
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var loadedVideo = document.querySelector('.showVideo');
 
       if (!this.props.video) {
         return _react2.default.createElement(
           'div',
-          null,
+          { className: 'loader' },
           'Loading...'
         );
       }
+      // else {
+      //   const currentVideo = document.querySelector("video");
+      //   currentVideo.addEventListener("loadeddata", () => {
+      //     this.setState({ loading: false });
+      //   });
+      // }
+
       var videoSrc = '' + this.props.video.videoUrl;
       var selected = void 0;
       if (this.props.video.id === this.props.selectedVideo) {
@@ -2064,7 +2089,14 @@ var VideoDetail = function (_React$Component) {
             { className: 'ui embed' },
             _react2.default.createElement(
               'video',
-              { controls: true, title: 'video player' },
+              {
+                className: 'showVideo',
+                controls: true,
+                title: 'video player',
+                style: {
+                  opacity: this.state.loading ? .25 : 1,
+                  transition: "opacity, 2s ease-in-out"
+                } },
               _react2.default.createElement('source', { src: videoSrc, type: 'video/mp4' })
             )
           ),
