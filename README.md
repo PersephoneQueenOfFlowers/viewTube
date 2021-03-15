@@ -30,12 +30,14 @@ application up and running.
 
 * rails postgres db commands<br />
   rails new <e.g. viewTube> --database=postgresql<br />
-  rails db:setup
-
-* How to run the test suite
+  rails db:setup (or rails db:seed if setup done)
 
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+  While in app directory, run rails server
+  While in frontend directory, run npm start
+ 
+  
 
 
