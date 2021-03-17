@@ -159,6 +159,10 @@
       &:focus {
         outline-width:0px !important;
       }
+      &:focus-visible {
+        outline: 0 !important;
+        outline-width:0px !important;
+      }
     }
   }
 }

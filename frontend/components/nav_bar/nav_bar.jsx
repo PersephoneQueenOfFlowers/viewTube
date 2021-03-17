@@ -18,7 +18,6 @@ export default ({ currentUser, logout, login }) => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    debugger 
     $('.signup, .login').css('visibility','visible');
     logout();
   }

@@ -1012,7 +1012,6 @@ exports.default = function (_ref) {
 
   var handleLogout = function handleLogout(e) {
     e.preventDefault();
-    debugger;
     $('.signup, .login').css('visibility', 'visible');
     logout();
   };
@@ -2076,12 +2075,6 @@ var VideoDetail = function (_React$Component) {
           'Loading...'
         );
       }
-      // else {
-      //   const currentVideo = document.querySelector("video");
-      //   currentVideo.addEventListener("loadeddata", () => {
-      //     this.setState({ loading: false });
-      //   });
-      // }
 
       var videoSrc = '' + this.props.video.videoUrl;
       var selected = void 0;

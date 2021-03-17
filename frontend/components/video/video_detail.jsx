@@ -26,12 +26,6 @@ class VideoDetail extends React.Component{
     if (!this.props.video) {
       return <div className="loader">Loading...</div>
     }
-    // else {
-    //   const currentVideo = document.querySelector("video");
-    //   currentVideo.addEventListener("loadeddata", () => {
-    //     this.setState({ loading: false });
-    //   });
-    // }
  
     const videoSrc = `${this.props.video.videoUrl}`;
     let selected;
