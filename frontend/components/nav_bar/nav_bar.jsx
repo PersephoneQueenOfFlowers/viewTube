@@ -16,6 +16,13 @@ export default ({ currentUser, logout, login }) => {
     login(formUser);
   }
 
+  const handleLogout = (e) => {
+    e.preventDefault();
+    debugger 
+    $('.signup, .login').css('visibility','visible');
+    logout();
+  }
+
   const display = currentUser ? (
     <div className={'nav'}>
       <div className={'left'}>
@@ -25,7 +32,7 @@ export default ({ currentUser, logout, login }) => {
 
       <div className={'center'}> <SearchBar /> </div> 
       <div className={'right'}>
-          <button onClick={logout}>Logout</button>
+          <button onClick={(e) => handleLogout(e)}>Logout</button>
       </div>
     </div>
   ) : (

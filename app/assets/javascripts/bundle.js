@@ -430,12 +430,15 @@ var CommentForm = function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      e.preventDefault();
       this.props.createNewComment(this.state);
       this.setState({ body: " " });
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement(
         "form",
         { className: "createComment" },
@@ -454,7 +457,9 @@ var CommentForm = function (_React$Component) {
           null,
           _react2.default.createElement(
             "button",
-            { type: "submit", onClick: this.handleSubmit },
+            { type: "submit", onClick: function onClick(e) {
+                return _this3.handleSubmit(e);
+              } },
             "Comment"
           )
         )
@@ -533,6 +538,7 @@ var Comments = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e, comment, commentBody) {
+      e.preventDefault();
       comment.body = commentBody;
       this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" });
       $('.changeText').addClass("hidden");
@@ -1004,6 +1010,13 @@ exports.default = function (_ref) {
     login(formUser);
   };
 
+  var handleLogout = function handleLogout(e) {
+    e.preventDefault();
+    debugger;
+    $('.signup, .login').css('visibility', 'visible');
+    logout();
+  };
+
   var display = currentUser ? _react2.default.createElement(
     'div',
     { className: 'nav' },
@@ -1039,7 +1052,9 @@ exports.default = function (_ref) {
       { className: 'right' },
       _react2.default.createElement(
         'button',
-        { onClick: logout },
+        { onClick: function onClick(e) {
+            return handleLogout(e);
+          } },
         'Logout'
       )
     )

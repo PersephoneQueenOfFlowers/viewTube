@@ -18,6 +18,7 @@ class CommentForm extends React.Component{
   }
 
   handleSubmit(e){
+    e.preventDefault();
     this.props.createNewComment(this.state);
     this.setState({ body: " "});
   }
@@ -35,7 +36,7 @@ class CommentForm extends React.Component{
         </div>
 
         <div>
-          <button type="submit" onClick={this.handleSubmit}>Comment</button>
+          <button type="submit" onClick={(e) => this.handleSubmit(e)}>Comment</button>
         </div>
       </form>
     )
