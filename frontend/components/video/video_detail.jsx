@@ -5,7 +5,8 @@ class VideoDetail extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      loading: true 
+      loading: true,
+      likes: [0]
     }
   }
 
@@ -16,22 +17,15 @@ class VideoDetail extends React.Component{
         this.setState({ loading: false });
       });
     }
+    debugger 
   }
 
   render() {
     const loadedVideo = document.querySelector('.showVideo');
 
-
-
     if (!this.props.video) {
       return <div className="loader">Loading...</div>
     }
-    // else {
-    //   const currentVideo = document.querySelector("video");
-    //   currentVideo.addEventListener("loadeddata", () => {
-    //     this.setState({ loading: false });
-    //   });
-    // }
  
     const videoSrc = `${this.props.video.videoUrl}`;
     let selected;
@@ -64,7 +58,7 @@ class VideoDetail extends React.Component{
               <p className="video-description">{this.props.video.description}</p>
             </div>
             <div className="shares-likes">
-
+              Likes: {this.state.likes.length}
             </div>
           </div>
         </Link>

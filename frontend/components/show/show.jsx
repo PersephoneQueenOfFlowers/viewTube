@@ -15,7 +15,11 @@ class Show extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ video : this.props.callCurrentVideo(this.props.match.params.id)})
+    this.setState({   
+      video : this.props.callCurrentVideo(this.props.match.params.id),
+      likes: this.props.fetchAllLikes(this.props.match.params.id)
+    })
+    debugger 
   }
 
   render() {

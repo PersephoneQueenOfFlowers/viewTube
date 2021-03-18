@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :videos, only: [:create, :index, :show]
     resource :session, only: [:create, :destroy, :new]
     resources :comments, only: [:create, :index, :destroy, :update]
+    resources :likes, only: [:create, :show, :destroy]
   end
 
   resources :gallery, only: [:create, :index, :show]

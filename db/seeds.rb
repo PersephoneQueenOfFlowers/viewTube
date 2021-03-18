@@ -73,6 +73,13 @@ comment2 = Comment.create({author_id: user2.id, video_id: v4.id, body: "I wonder
 comment3 = Comment.create({author_id: user3.id, video_id: v4.id, body: "I can't imagine how much these people must train all their lives long. I guess part of their practice is that they smack a wooden pole repeatedly, all. day. long."})
 comment4 = Comment.create({author_id: user4.id, video_id: v4.id, body: "Hmmmm. that doesn't sound very pleasant"})
 
+Like.create!(user_id: user1.id, video_id: v12.id)
+Like.create!(user_id: user2.id, video_id: v13.id)
+Like.create!(user_id: user3.id, video_id: v13.id)
+Like.create!(user_id: user4.id, video_id: v14.id)
+Like.create!(user_id: user1.id, video_id: v15.id)
+Like.create!(user_id: user2.id, video_id: v16.id)
+Like.create!(user_id: user3.id, video_id: v18.id)
 
 
 

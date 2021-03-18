@@ -134,6 +134,11 @@
           }
         }
       }
+      .shares-likes {
+        display: flex;
+        flex-direction: row;
+        min-width: 40px;
+      }
     }
     h4 {
       color: var(--yt-spec-text-primary);

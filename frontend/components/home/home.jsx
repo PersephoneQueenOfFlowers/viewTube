@@ -8,7 +8,6 @@ class Home extends React.Component{
     super(props)
     $(".nav .right *, .nav .center").css("visibility", "visible");
     this.state = {videos: [], autoplay: false}
-
   }
 
   componentDidMount(){

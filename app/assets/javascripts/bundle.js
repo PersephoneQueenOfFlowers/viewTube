@@ -173,6 +173,76 @@ var updateCurrentComment = exports.updateCurrentComment = function updateCurrent
 
 /***/ }),
 
+/***/ "./frontend/actions/like_actions.js":
+/*!******************************************!*\
+  !*** ./frontend/actions/like_actions.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeCurrentLike = exports.createLike = exports.fetchAllLikes = exports.REMOVE_LIKE = exports.RECEIVE_LIKE = exports.RECEIVE_LIKES = undefined;
+
+var _likes = __webpack_require__(/*! ../utils/likes */ "./frontend/utils/likes.js");
+
+var RECEIVE_LIKES = exports.RECEIVE_LIKES = 'RECEIVE_LIKES';
+var RECEIVE_LIKE = exports.RECEIVE_LIKE = "RECEIVE_LIKE";
+var REMOVE_LIKE = exports.REMOVE_LIKE = "REMOVE_LIKE";
+
+var receiveLikes = function receiveLikes(likes) {
+  return {
+    type: RECEIVE_LIKES,
+    likes: likes
+  };
+};
+
+var receiveLike = function receiveLike(like) {
+  return {
+    type: RECEIVE_LIKE,
+    like: like
+  };
+};
+
+var removeLike = function removeLike(likeId) {
+  return {
+    type: REMOVE_LIKE,
+    likeId: likeId
+  };
+};
+
+var fetchAllLikes = exports.fetchAllLikes = function fetchAllLikes(videoId) {
+  return function (dispatch) {
+    return (0, _likes.fetchLikes)(videoId).then(function (likes) {
+      return dispatch(receiveLikes(likes));
+    });
+  };
+};
+// .fail(error => (dispatch(receiveErrors(error.responseJSON))));
+
+var createLike = exports.createLike = function createLike(like) {
+  return function (dispatch) {
+    return (0, _likes.postLike)(like).then(function (like) {
+      return dispatch(receiveLike(like));
+    });
+  };
+};
+// .fail(error => (dispatch(receiveErrors(error.responseJSON))));
+
+var removeCurrentLike = exports.removeCurrentLike = function removeCurrentLike(likeId) {
+  return function (dispatch) {
+    return (0, _likes.deleteLike)(likeId).then(function () {
+      return dispatch(removeLike(likeId));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/session.js":
 /*!*************************************!*\
   !*** ./frontend/actions/session.js ***!
@@ -868,7 +938,6 @@ var Home = function (_React$Component) {
 
     $(".nav .right *, .nav .center").css("visibility", "visible");
     _this.state = { videos: [], autoplay: false };
-
     return _this;
   }
 
@@ -1781,7 +1850,11 @@ var Show = function (_React$Component) {
   _createClass(Show, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.setState({ video: this.props.callCurrentVideo(this.props.match.params.id) });
+      this.setState({
+        video: this.props.callCurrentVideo(this.props.match.params.id),
+        likes: this.props.fetchAllLikes(this.props.match.params.id)
+      });
+      debugger;
     }
   }, {
     key: 'render',
@@ -1832,6 +1905,8 @@ var _reactRedux = __webpack_require__(/*! react-redux */ "./node_modules/react-r
 
 var _video_actions = __webpack_require__(/*! ../../actions/video_actions */ "./frontend/actions/video_actions.js");
 
+var _like_actions = __webpack_require__(/*! ../../actions/like_actions */ "./frontend/actions/like_actions.js");
+
 var _show = __webpack_require__(/*! ./show */ "./frontend/components/show/show.jsx");
 
 var _show2 = _interopRequireDefault(_show);
@@ -1849,6 +1924,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     callCurrentVideo: function callCurrentVideo(videoId) {
       return dispatch((0, _video_actions.callCurrentVideo)(videoId));
+    },
+    fetchAllLikes: function fetchAllLikes(videoId) {
+      return dispatch((0, _like_actions.fetchAllLikes)(videoId));
     }
   };
 };
@@ -2032,7 +2110,8 @@ var VideoDetail = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (VideoDetail.__proto__ || Object.getPrototypeOf(VideoDetail)).call(this, props));
 
     _this.state = {
-      loading: true
+      loading: true,
+      likes: [0]
     };
     return _this;
   }
@@ -2048,6 +2127,7 @@ var VideoDetail = function (_React$Component) {
           _this2.setState({ loading: false });
         });
       }
+      debugger;
     }
   }, {
     key: 'render',
@@ -2061,12 +2141,6 @@ var VideoDetail = function (_React$Component) {
           'Loading...'
         );
       }
-      // else {
-      //   const currentVideo = document.querySelector("video");
-      //   currentVideo.addEventListener("loadeddata", () => {
-      //     this.setState({ loading: false });
-      //   });
-      // }
 
       var videoSrc = '' + this.props.video.videoUrl;
       var selected = void 0;
@@ -2117,7 +2191,12 @@ var VideoDetail = function (_React$Component) {
                 this.props.video.description
               )
             ),
-            _react2.default.createElement('div', { className: 'shares-likes' })
+            _react2.default.createElement(
+              'div',
+              { className: 'shares-likes' },
+              'Likes: ',
+              this.state.likes.length
+            )
           )
         )
       );
@@ -2301,6 +2380,10 @@ var _comments = __webpack_require__(/*! ./comments */ "./frontend/reducers/comme
 
 var _comments2 = _interopRequireDefault(_comments);
 
+var _likes = __webpack_require__(/*! ./likes */ "./frontend/reducers/likes.js");
+
+var _likes2 = _interopRequireDefault(_likes);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // import videos from './videos_reducer';
@@ -2309,7 +2392,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = (0, _redux.combineReducers)({
   users: _users2.default,
   videos: _videos2.default,
-  comments: _comments2.default
+  comments: _comments2.default,
+  likes: _likes2.default
 });
 
 /***/ }),
@@ -2348,6 +2432,44 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
 };
 
 exports.default = sessionErrorsReducer;
+
+/***/ }),
+
+/***/ "./frontend/reducers/likes.js":
+/*!************************************!*\
+  !*** ./frontend/reducers/likes.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _like_actions = __webpack_require__(/*! ../actions/like_actions */ "./frontend/actions/like_actions.js");
+
+exports.default = function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  var newState = Object.assign({}, state);
+  switch (action.type) {
+    case _like_actions.RECEIVE_LIKES:
+      return Object.assign({}, action.likes);
+    case _like_actions.RECEIVE_LIKE:
+      newState.likes[action.like.likeId] = action.like;
+      return newState;
+    case _like_actions.REMOVE_LIKE:
+      delete newState.likes[action.likeId];
+      return newState;
+    default:
+      return state;
+  }
+};
 
 /***/ }),
 
@@ -2609,6 +2731,46 @@ var modifyComment = exports.modifyComment = function modifyComment(comment) {
     url: '/api/comments/' + comment.id,
     method: 'PATCH',
     data: { comment: comment }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/utils/likes.js":
+/*!*********************************!*\
+  !*** ./frontend/utils/likes.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// fetchLikes, postLike, deleteLike
+
+var fetchLikes = exports.fetchLikes = function fetchLikes(videoId) {
+  debugger;
+  return $.ajax({
+    url: '/api/likes' + videoId,
+    method: 'GET'
+  });
+};
+
+var postLike = exports.postLike = function postLike(like) {
+  return $.ajax({
+    url: '/api/likes',
+    method: 'POST',
+    data: { like: like }
+  });
+};
+
+var deleteLike = exports.deleteLike = function deleteLike(likeId) {
+  return $.ajax({
+    url: '/api/comments/' + likeId,
+    method: 'DELETE'
   });
 };
 
