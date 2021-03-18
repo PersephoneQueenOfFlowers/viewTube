@@ -1,8 +1,29 @@
 <!DOCTYPE html>
-<html style="font-size: 10px;font-family: Roboto, Arial, sans-serif;">
+<html style="font-size: 10px;font-family: Roboto, Arial, sans-serif;" prefix="og: http://ogp.me/ns#">
   <head>
+  <meta 
+  property="og:title"
+  content="viewTube" 
+/>
+<meta 
+  name="image" 
+  property="og:image" 
+  content="%PUBLIC_URL%/feature-viewtube-nt.png" 
+/>
+<meta 
+  name="author" 
+  content="Seth Schoenfeld" 
+/>
+<meta 
+  property="og:description" 
+  content="A simpler single-page react-based clone of youtube."
+/>
+<meta 
+  property="og:url" 
+  content="https://viewtube2021.herokuapp.com/" 
+/>
     <title>ViooTube</title>
-      <link rel="shortcut icon" type="image/jpg" href="viooTubeFavicon.jpg"/>
+    <link rel="shortcut icon" type="image/jpg" href="viooTubeFavicon.jpg"/>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
