@@ -2213,7 +2213,7 @@ var VideoList = function VideoList(videos) {
   var renderedList = Object.values(videos.videos).map(function (video) {
     return _react2.default.createElement(
       'div',
-      { className: "videoItemContainer" },
+      { key: video.id, className: "videoItemContainer" },
       _react2.default.createElement(_video_detail2.default, { video: video })
     );
   });

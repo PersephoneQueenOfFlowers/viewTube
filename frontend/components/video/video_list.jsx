@@ -9,7 +9,7 @@ const VideoList = ( videos) => {
 
   const renderedList = Object.values(videos.videos).map(video => {
     return (
-      <div className={"videoItemContainer"}>
+      <div key={video.id} className={"videoItemContainer"}>
         <VideoDetail video={video} />
         </div>
       )
