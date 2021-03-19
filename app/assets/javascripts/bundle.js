@@ -533,6 +533,7 @@ var Comments = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e, comment, commentBody) {
+      e.preventDefault();
       comment.body = commentBody;
       this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" });
       $('.changeText').addClass("hidden");
