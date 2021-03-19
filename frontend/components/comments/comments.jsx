@@ -24,6 +24,7 @@ class Comments extends React.Component {
   }
 
   handleSubmit(e, comment, commentBody){ 
+    e.preventDefault();
     comment.body = commentBody;
     this.setState({ showHideCommentUpdate: false, commentUpdateButton: "update" });
     $('.changeText').addClass("hidden");
