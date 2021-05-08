@@ -20,12 +20,11 @@
 /node_modules
 /yarn-error.log
 
-/public/assets
+
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/public/assets
 
 # ignore bundle.js and bj.map
 /app/assets/javascripts/bundle.js
